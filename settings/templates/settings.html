@@ -11,29 +11,30 @@
     <div class="person-card">
         <img src="{{ session["image"] }}" alt="" class="title-image">
         <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
-        <div class="title-login">{{ session["login"] }}</div>
+        <div class="title-login">LOGIN: {{ session["login"] }}</div>
+        <div class="title-role">{{ session["role"] }}</div>
     </div>
-{#    <div class="content-title">Личные данные</div>#}
+{#    <div class="content-title">Редактировать личные данные</div>#}
     <form action="" class="info">
         <label for="" class="name">
-            <span>Имя</span>
+            <div class="field-name">Имя</div>
             <input type="text" value="{{ session["name"] }}">
         </label>
         <label for="" class="surname">
-            <span>Фамилия</span>
+            <div class="field-name">Фамилия</div>
             <input type="text" value="{{ session["surname"] }}" class="surname">
         </label>
         <label for="" class="patronymic">
-            <span>Отчество</span>
+            <div class="field-name">Отчество</div>
             <input type="text" value="{{ session["patronymic"] }}" class="patronymic">
         </label>
         <label for="" class="sex">
-            <span>Пол</span>
+            <div class="field-name">Пол</div>
             <input type="text" value="{{ session["sex"] }}" class="sex">
         </label>
         <label for="" class="birth-date">
-            <span>Дата рождения</span>
-            <input type="text" value="{{ session["birth_date"] }}" class="birth-date">
+            <div class="field-name">Дата рождения</div>
+            <input type="text" readonly value="{{ session["birth_date"] }}" class="birth-date">
         </label>
     </form>
 </div>
