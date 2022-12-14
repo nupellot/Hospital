@@ -8,22 +8,31 @@
 <body>
 
 <div class="content">
-    <div class="content-title">
+    <div class="person-card">
         <img src="{{ session["image"] }}" alt="" class="title-image">
-        <div class="title-name">{{ session["surname"] }}</div>
+        <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
         <div class="title-login">{{ session["login"] }}</div>
     </div>
+{#    <div class="content-title">Личные данные</div>#}
     <form action="" class="info">
         <label for="" class="name">
+            <span>Имя</span>
             <input type="text" value="{{ session["name"] }}">
         </label>
         <label for="" class="surname">
+            <span>Фамилия</span>
             <input type="text" value="{{ session["surname"] }}" class="surname">
         </label>
+        <label for="" class="patronymic">
+            <span>Отчество</span>
+            <input type="text" value="{{ session["patronymic"] }}" class="patronymic">
+        </label>
         <label for="" class="sex">
+            <span>Пол</span>
             <input type="text" value="{{ session["sex"] }}" class="sex">
         </label>
         <label for="" class="birth-date">
+            <span>Дата рождения</span>
             <input type="text" value="{{ session["birth_date"] }}" class="birth-date">
         </label>
     </form>

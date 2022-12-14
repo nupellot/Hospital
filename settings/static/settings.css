@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,900&family=Open+Sans:wght@800&family=Roboto+Mono:wght@700&display=swap');
+
+body {
+    font-family: "Montserrat", sans-serif;
+    /*min-height: 100vh;*/
+    /*width: 100vw;*/
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    font-family: inherit;
+}
+
+.content {
+    outline: 1px solid red;
+    margin-top: 5rem;
+    /*align-self: center;*/
+    display: grid;
+    /*grid-template-rows: 150px;*/
+    grid-row-gap: 20px;
+}
+
+.person-card {
+    outline: 2px solid green;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+}
+
+.person-card > * {
+    outline: 1px solid cyan;
+}
+
+.title-image {
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.title-name {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    align-self: flex-end;
+    font-size: 1.25rem;
+}
+
+.title-login {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    align-self: flex-start;
+    color: gray;
+}
+
+.title-image {
+    width: 135px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.info > label {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.info span {
+    color: gray;
+}
+
+
+
+
+
