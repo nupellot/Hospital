@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Настройки</title>
+    <link rel="stylesheet" href="{{ url_for('bp_settings.static', filename='settings.css') }}">
+</head>
+<body>
+
+<div class="content">
+    <div class="content-title">
+        <img src="{{ session["image"] }}" alt="" class="title-image">
+        <div class="title-name">{{ session["surname"] }}</div>
+        <div class="title-login">{{ session["login"] }}</div>
+    </div>
+    <form action="" class="info">
+        <label for="" class="name">
+            <input type="text" value="{{ session["name"] }}">
+        </label>
+        <label for="" class="surname">
+            <input type="text" value="{{ session["surname"] }}" class="surname">
+        </label>
+        <label for="" class="sex">
+            <input type="text" value="{{ session["sex"] }}" class="sex">
+        </label>
+        <label for="" class="birth-date">
+            <input type="text" value="{{ session["birth_date"] }}" class="birth-date">
+        </label>
+    </form>
+</div>
+
+</body>
+</html>
