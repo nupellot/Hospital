@@ -8,10 +8,12 @@ body {
     display: flex;
     justify-content: center;
     background: linear-gradient(to right, #ffa4a4, #afffd0);
+    font-weight: 600;
 }
 
 input {
     font-family: inherit;
+    font-weight: inherit;
     border: none;
 }
 
@@ -106,6 +108,7 @@ label > input {
     border: 1px solid #c9c9c9;
     /*background: linear-gradient(to right, #e0eeff, #f3eefa);*/
     background: #efefef;
+    font-weight: 500;
 }
 
 .field-name {
