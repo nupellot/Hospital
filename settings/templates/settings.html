@@ -63,7 +63,7 @@
             {% if session["dismissal_date"] %}
             <input type="text" readonly value="{{ session["dismissal_date"] }}" class="dismissal-date">
             {% else %}
-            <input type="text" readonly value="{{ session["dismissal_date"] }}" class="dismissal-date">
+            <input type="text" readonly value="Всё ещё на службе" class="dismissal-date">
             {% endif %}
         </label>
         {% endif %}
