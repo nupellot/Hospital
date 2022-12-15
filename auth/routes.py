@@ -50,6 +50,9 @@ def start_auth():
                     session[field] = user_dict[field]
                 if not is_doctor:
                     session["role"] = "patient"
+
+                if session["image"]:
+                    session["image"] = url_for("static", filename="user_photos") + "/" + session["image"]
                 # session['user_id'] = user_dict['user_id']
                 # session['user_group'] = user_dict['user_group']
                 # session['user_name'] = user_dict['user_name']
