@@ -85,6 +85,18 @@ input {
     border-top-left-radius: inherit;
 }
 
+.title-patient {
+    background: blue;
+}
+
+.title-doctor {
+    background: green;
+}
+
+.title-administrator {
+    background: red;
+}
+
 
 .info {
     display: grid;

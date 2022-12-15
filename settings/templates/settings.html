@@ -8,12 +8,16 @@
 <body>
 
 <div class="content">
+
+    {% block person_card %}
     <div class="person-card">
         <img src="{{ session["image"] }}" alt="" class="title-image">
         <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
         <div class="title-login">LOGIN: {{ session["login"] }}</div>
-        <div class="title-role">{{ session["role"] }}</div>
+        <div class="title-role title-{{ session["role"] }}">{{ session["role"] }}</div>
     </div>
+    {% endblock %}
+
     <div class="content-title">Редактировать личные данные пока нельзя ;(</div>
     <form action="" class="info">
         <label for="" class="name">
