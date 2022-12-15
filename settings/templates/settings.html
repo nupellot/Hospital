@@ -36,6 +36,37 @@
             <div class="field-name">Дата рождения</div>
             <input type="text" readonly value="{{ session["birth_date"] }}" class="birth-date">
         </label>
+        <label for="" class="address">
+            <div class="field-name">Адрес проживания</div>
+            <input type="text" value="{{ session["address"] }}" class="address">
+        </label>
+        <label for="" class="passport-number">
+            <div class="field-name">Номер паспорта</div>
+            <input type="text" value="{{ session["passport_number"] }}" class="passport-number">
+        </label>
+
+        {% if session["role"] != "patient" %}
+        <label for="" class="specialization">
+            <div class="field-name">Специализация</div>
+            <input type="text" readonly value="{{ session["specialization"] }}" class="specialization">
+        </label>
+        <label for="" class="experience">
+            <div class="field-name">Рабочий стаж</div>
+            <input type="text" readonly value="{{ session["experience"] }}" class="experience">
+        </label>
+        <label for="" class="recruitment-date">
+            <div class="field-name">Дата приёма на работу</div>
+            <input type="text" readonly value="{{ session["recruitment_date"] }}" class="recruitment-date">
+        </label>
+        <label for="" class="dismissal-date">
+            <div class="field-name">Дата увольнения</div>
+            {% if session["dismissal_date"] %}
+            <input type="text" readonly value="{{ session["dismissal_date"] }}" class="dismissal-date">
+            {% else %}
+            <input type="text" readonly value="{{ session["dismissal_date"] }}" class="dismissal-date">
+            {% endif %}
+        </label>
+        {% endif %}
     </form>
 </div>
 
