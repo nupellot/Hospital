@@ -93,7 +93,11 @@ input {
     background: green;
 }
 
-.title-administrator {
+.title-registrator {
+    background: #ff9a00;
+}
+
+.title-admin {
     background: red;
 }
 
