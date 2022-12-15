@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Authentication</title>
     <link href="static/style.css" type="text/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
     <div class="login-card-container">
@@ -22,7 +23,7 @@
                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
                         </svg>
                     </span>
-                    <input type="text" id="login" name="login" placeholder="Логин">
+                    <input class="form-input" type="text" id="login" name="login" placeholder="Логин">
                 </div>
                 <div class="form-item">
                     <span class="icon">
@@ -32,16 +33,16 @@
                            <path d="M15 9h.01"></path>
                         </svg>
                     </span>
-                    <input type="password" name="password" id="password" placeholder="Пароль">
+                    <input class="form-input" type="password" name="password" id="password" placeholder="Пароль">
                 </div>
                 <div class="form-item">
                     <button type="submit" class="login-button">Войти</button>
                 </div>
-                <div class="choosing form-item">
-                    <button class="patient" onclick="as_patient()">Как пациент</button>
-                    <button class="doctor" onclick="as_doctor()">Как сотрудник</button>
-                    <div class="moving-bg"></div>
-                </div>
+{#                <div class="choosing form-item">#}
+{#                    <input type="button" class="patient" onclick="as_patient()" value="Как пациент">#}
+{#                    <input type="button" class="doctor" onclick="as_doctor()" value="Как сотрудник">#}
+{#                    <div class="moving-bg" id="moving-bg"></div>#}
+{#                </div>#}
             </form>
         </div>
 
@@ -51,6 +52,29 @@
 
         <img src="static/shrek.png" alt="shrek" class="shrek">
     </div>
+
+    <script>
+
+            {#let moving_bg = document.getElementsByClassName("moving-bg");#}
+            {##}
+            {#function as_patient() {#}
+            {#    alert("jopa");#}
+            {#    $("input[name=\"is-doctor\"]").remove();#}
+            {#    moving_bg.style.right = "auto";#}
+            {#    moving_bg.style.left = "0";#}
+            {#}#}
+            {##}
+            {#function as_doctor() {#}
+            {#    alert("jopa");#}
+            {#    $( ".login-card-form" ).append( "<input name=\"is-doctor\" hidden>" );#}
+            {#    moving_bg.style.left = "auto";#}
+            {#    moving_bg.style.right = "0";#}
+            {#}#}
+
+            {#$( ".login-card-form" ).append( "JOPAAAAAAAAAAAAAAA" );#}
+
+
+    </script>
 
 
 

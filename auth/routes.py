@@ -29,15 +29,15 @@ def start_auth():
     else:
         login = request.form.get('login')
         password = request.form.get('password')
-        if request.form.get("is-doctor"):
-            is_doctor = True
-        else:
-            is_doctor = False
+        # if request.form.get("is-doctor"):
+        #     is_doctor = True
+        # else:
+        #     is_doctor = False
         print("login", login)
         print("password", password)
         if login:
             # Получаем информацию о разных пользователях с таким логином и паролем.
-            user_info = get_user_info(login, password, is_doctor)
+            user_info = get_user_info(login, password)
             print("user_info", user_info)
             if user_info:
                 # Берём первого (единственного) пользователя с таким логином и паролем.
@@ -46,10 +46,12 @@ def start_auth():
                 # Записываем в сессию полученную из БД информацию о пользователе.
                 session.clear()
 
+                session["role"] = "patient"
                 for field in user_dict:
-                    session[field] = user_dict[field]
-                if not is_doctor:
-                    session["role"] = "patient"
+                    if user_dict[field] == None:
+                        session[field] = ""
+                    else:
+                        session[field] = user_dict[field]
 
                 if session["image"]:
                     session["image"] = url_for("static", filename="user_photos") + "/" + session["image"]
@@ -66,19 +68,29 @@ def start_auth():
 
 # В случае нахождения юзера с такими данными возвращает лист словарей.
 # Каждый словарь - набор информации о конкретном пользователе.
-def get_user_info(login: str, password: str, is_doctor: bool) -> Optional[Dict]:
+def get_user_info(login: str, password: str) -> Optional[Dict]:
     # Создаём sql-запросы для получения информации о польователях из БД.
-    if is_doctor:
-        sql_query = provider.get('doctor.sql', login=login, password=password)
-    if not is_doctor:
-        sql_query = provider.get('patient.sql', login=login, password=password)
+    # if is_doctor:
+    #     sql_query = provider.get('doctor.sql', login=login, password=password)
+    # if not is_doctor:
+    #     sql_query = provider.get('patient.sql', login=login, password=password)
 
-    # Выполняем нужный sql-запрос.
+    sql_query = provider.get('doctor.sql', login=login, password=password)
     user_info = select_dict(current_app.config['db_config'], sql_query)
     if user_info:
         return user_info
-    else:
-        return None
+    elif not user_info:
+        sql_query = provider.get('patient.sql', login=login, password=password)
+        user_info = select_dict(current_app.config['db_config'], sql_query)
+        return user_info
+
+
+    # Выполняем нужный sql-запрос.
+    # user_info = select_dict(current_app.config['db_config'], sql_query)
+    # if user_info:
+    #     return user_info
+    # else:
+    #     return None
 
     # Получили готовые запросы.
     # print(sql_for_doctors)
