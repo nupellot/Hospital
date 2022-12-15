@@ -14,23 +14,23 @@
         <div class="title-login">LOGIN: {{ session["login"] }}</div>
         <div class="title-role">{{ session["role"] }}</div>
     </div>
-{#    <div class="content-title">Редактировать личные данные</div>#}
+    <div class="content-title">Редактировать личные данные пока нельзя ;(</div>
     <form action="" class="info">
         <label for="" class="name">
             <div class="field-name">Имя</div>
-            <input type="text" value="{{ session["name"] }}">
+            <input type="text" readonly value="{{ session["name"] }}">
         </label>
         <label for="" class="surname">
             <div class="field-name">Фамилия</div>
-            <input type="text" value="{{ session["surname"] }}" class="surname">
+            <input type="text" readonly value="{{ session["surname"] }}" class="surname">
         </label>
         <label for="" class="patronymic">
             <div class="field-name">Отчество</div>
-            <input type="text" value="{{ session["patronymic"] }}" class="patronymic">
+            <input type="text" readonly value="{{ session["patronymic"] }}" class="patronymic">
         </label>
         <label for="" class="sex">
             <div class="field-name">Пол</div>
-            <input type="text" value="{{ session["sex"] }}" class="sex">
+            <input type="text" readonly value="{{ session["sex"] }}" class="sex">
         </label>
         <label for="" class="birth-date">
             <div class="field-name">Дата рождения</div>
@@ -38,11 +38,11 @@
         </label>
         <label for="" class="address">
             <div class="field-name">Адрес проживания</div>
-            <input type="text" value="{{ session["address"] }}" class="address">
+            <input type="text" readonly value="{{ session["address"] }}" class="address">
         </label>
         <label for="" class="passport-number">
             <div class="field-name">Номер паспорта</div>
-            <input type="text" value="{{ session["passport_number"] }}" class="passport-number">
+            <input type="text" readonly value="{{ session["passport_number"] }}" class="passport-number">
         </label>
 
         {% if session["role"] != "patient" %}
