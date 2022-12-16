@@ -60,7 +60,8 @@ def start_auth():
                 # session['user_name'] = user_dict['user_name']
                 # session['user_login'] = login
                 session.permanent = True
-                return redirect(url_for('bp_settings.main', user_login = session["login"]))
+                return redirect(url_for('bp_patient.main', user_login = session["login"]))
+                # return render_template("base.html")
             else:  # Не нашёлся пользователь с такими данными.
                 return render_template('input_login.html', message='Неверные данные для входа')
         return render_template('input_login.html', message='Повторите ввод')
