@@ -28,7 +28,7 @@ input {
 }
 
 .container {
-    outline: 2px solid aqua;
+    /*outline: 2px solid aqua;*/
     width: 65%;
     margin-right: auto;
     margin-left: auto;
@@ -83,13 +83,12 @@ input {
 }
 
 .header .user-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-
+    font-weight: 500;
+    font-size: 1rem;
 }
 
 .content {
-    margin-top: 4rem;
+    margin-top: 4.5rem;
     min-height: 100px;
     padding: 30px;
     border-radius: 10px;
