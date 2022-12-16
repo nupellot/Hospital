@@ -9,10 +9,10 @@
 <div class="container">
     <header class="header">
         <div class="header-inner-container">
-            <div class="title">
-                <img class="plus-icon" src="static/plus.png">
+            <a class="title" href="{{ url_for('bp_patient.main', user_login = session["login"]) }}">
+                <img class="plus-icon" src="{{ url_for("bp_patient.static", filename="plus.png") }}">
                 <div class="title-text">Hospital</div>
-            </div>
+            </a>
             <a href="{{ url_for("bp_patient.settings", user_login = session["login"]) }}" class="user-info">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon settings-icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
