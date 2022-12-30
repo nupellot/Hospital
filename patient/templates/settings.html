@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block settings %}
+
+<title>Настройки</title>
+<link rel="stylesheet" href="{{ url_for('bp_patient.static', filename='settings.css') }}">
+
+{% block person_card %}
+<div class="person-card">
+    <img src="{{ session["image"] }}" alt="" class="title-image">
+    <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
+    <div class="title-login">LOGIN: {{ session["login"] }}</div>
+    <div class="title-role title-{{ session["role"] }}">{{ session["role"] }}</div>
+</div>
+{% endblock %}
+
+<div class="content-title">Редактировать личные данные пока нельзя ;(</div>
+<form action="" class="info">
+    <label for="" class="name">
+        <div class="field-name">Имя</div>
+        <input type="text" readonly value="{{ session["name"] }}">
+    </label>
+    <label for="" class="surname">
+        <div class="field-name">Фамилия</div>
+        <input type="text" readonly value="{{ session["surname"] }}" class="surname">
+    </label>
+    <label for="" class="patronymic">
+        <div class="field-name">Отчество</div>
+        <input type="text" readonly value="{{ session["patronymic"] }}" class="patronymic">
+    </label>
+    <label for="" class="sex">
+        <div class="field-name">Пол</div>
+        <input type="text" readonly value="{{ session["sex"] }}" class="sex">
+    </label>
+    <label for="" class="birth-date">
+        <div class="field-name">Дата рождения</div>
+        <input type="text" readonly value="{{ session["birth_date"] }}" class="birth-date">
+    </label>
+    <label for="" class="address">
+        <div class="field-name">Адрес проживания</div>
+        <input type="text" readonly value="{{ session["address"] }}" class="address">
+    </label>
+    <label for="" class="passport-number">
+        <div class="field-name">Номер паспорта</div>
+        <input type="text" readonly value="{{ session["passport_number"] }}" class="passport-number">
+    </label>
+
+    {% if session["role"] != "patient" %}
+    <label for="" class="specialization">
+        <div class="field-name">Специализация</div>
+        <input type="text" readonly value="{{ session["specialization"] }}" class="specialization">
+    </label>
+    <label for="" class="experience">
+        <div class="field-name">Рабочий стаж</div>
+        <input type="text" readonly value="{{ session["experience"] }}" class="experience">
+    </label>
+    <label for="" class="recruitment-date">
+        <div class="field-name">Дата приёма на работу</div>
+        <input type="text" readonly value="{{ session["recruitment_date"] }}" class="recruitment-date">
+    </label>
+    <label for="" class="dismissal-date">
+        <div class="field-name">Дата увольнения</div>
+        {% if session["dismissal_date"] %}
+        <input type="text" readonly value="{{ session["dismissal_date"] }}" class="dismissal-date">
+        {% else %}
+        <input type="text" readonly value="Всё ещё на службе" class="dismissal-date">
+        {% endif %}
+    </label>
+    {% endif %}
+</form>
+
+{% endblock %}
