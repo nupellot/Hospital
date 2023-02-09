@@ -31,7 +31,9 @@
     </header>
 
     <div class="content">
-        {% block settings %}{% endblock %}
+        {% block settings %}
+            {% block person_card %}{% endblock %}
+        {% endblock %}
         {% block patient %}{% endblock %}
     </div>
 </div>

@@ -1,0 +1,13 @@
+{% block person_card %}
+
+<div class="person-card">
+<link rel="stylesheet" href="{{ url_for('bp_patient.static', filename='person_card.css') }}">
+    <img src="{{ session["image"] }}" alt="" class="title-image">
+    <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
+    <div class="title-login">LOGIN: {{ session["login"] }}</div>
+    <div class="title-role title-{{ session["role"] }}">{{ session["role"] }}</div>
+    {% if session["location"] %}
+        <a class="title-location" href="https://google.com">Содержится в палате {{ session["location"] }}</a>
+    {% endif %}
+</div>
+{% endblock %}

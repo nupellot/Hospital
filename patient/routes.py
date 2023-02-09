@@ -25,6 +25,14 @@ def main(user_login):
         sql_for_stories = provider.get("stories.sql", login=user_login)
         # print("sql_for_stories:", sql_for_stories)
         stories = select_dict(current_app.config['db_config'], sql_for_stories)
+        print("stories:", stories)
+
+        sql_for_location = provider.get("location.sql", id_patient=session["id_patient"])
+        location = select_dict(current_app.config['db_config'], sql_for_location)
+        print("location:", location)
+        if location:
+            location = location[0]  # Человек может находиться только в одной палате одновременно.
+            session["location"] = str(location["id_department"]) + "-" + str(location["id_ward"])
 
         return render_template('patient.html', session=session, stories=stories)
     else:
