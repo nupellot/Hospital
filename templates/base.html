@@ -22,7 +22,9 @@
                 <span class="user-name">
                     {{ session["surname"] }}
                     {{ session["name"][0] }}.
-                    {{ session["patronymic"][0] }}.
+                    {% if session["patronymic"][0] %}
+                        {{ session["patronymic"][0] }}.
+                    {% endif %}
                 </span>
             </a>
             </div>
