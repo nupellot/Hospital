@@ -5,14 +5,8 @@
 <title>Настройки</title>
 <link rel="stylesheet" href="{{ url_for('bp_patient.static', filename='settings.css') }}">
 
-{% block person_card %}
-<div class="person-card">
-    <img src="{{ session["image"] }}" alt="" class="title-image">
-    <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
-    <div class="title-login">LOGIN: {{ session["login"] }}</div>
-    <div class="title-role title-{{ session["role"] }}">{{ session["role"] }}</div>
-</div>
-{% endblock %}
+
+{% include 'person_card.html' %}
 
 <div class="content-title">Редактировать личные данные пока нельзя ;(</div>
 <form action="" class="info">
