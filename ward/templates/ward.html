@@ -8,21 +8,31 @@
     {% if ward %}
 
     <div class="main-info">
-    {{ ward["id_department"] }}-{{ ward["id_ward"] }}
+        <span class="ward-number">{{ ward[0]["id_department"] }}-{{ ward[0]["id_ward"] }}, </span>
 
-    {% if ward["wtype"] == "VIP" %}
-        <span class="vip-badge">VIP</span>
+    {% if ward[0]["wtype"] == "VIP" %}
+        <span class="vip-badge">VIP </span>
     {% endif %}
-
-    - {{ ward["department_name"] }}, {{ ward["floor"] }} этаж.
+        {{ ward[0]["department_name"] }} отделение, {{ ward[0]["floor"] }} этаж.
     </div>
 
-    <div class="occupancy">{{ ward["occupancy"] }}/{{ ward["capacity"] }}</div>
+    <div class="occupancy">{{ ward[0]["occupancy"] }}/{{ ward[0]["capacity"] }}</div>
 
     {% else %}
         Информации о палате не найдено
 
     {% endif %}
+</div>
+
+
+<div class="patient-list">
+{% for patient in ward %}
+    
+    <a class="patient-card">
+        <img src="{{ patient["image"] }}" alt="" class="patient-photo">
+    </a>
+    
+{% endfor %}
 </div>
 
 {% endblock %}

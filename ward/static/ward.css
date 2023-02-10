@@ -3,8 +3,8 @@
     /*outline: 1px solid red;*/
     display: flex;
     justify-content: space-between;
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 400;
     /*align-items: center;*/
 }
 
@@ -17,8 +17,18 @@
     align-items: center;
 }
 
+.ward-number, .occupancy {
+    font-weight: 600;
+    color: #16af00;
+}
+
+.ward-number {
+    margin-right: 0.5rem;
+}
+
 .vip-badge {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
     color: white;
     background: #ffc11b;
     border-radius: 3px;
