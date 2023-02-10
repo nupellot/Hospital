@@ -36,6 +36,7 @@ input {
 }
 
 .header {
+    z-index: 1;
     position: fixed;
     display: flex;
     justify-content: center;
