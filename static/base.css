@@ -91,7 +91,7 @@ input {
 .content {
     margin-top: 4.5rem;
     min-height: 100px;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 1px .625rem 0 hsla(210, 7%, 0%, .26), 0 .125rem .25rem 0 hsla(210, 7%, 22%, .08);
