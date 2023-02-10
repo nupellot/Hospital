@@ -9,6 +9,7 @@ from report.routes import blueprint_report
 from basket.routes import blueprint_basket
 from access import login_required
 from patient.routes import blueprint_patient
+from ward.routes import blueprint_ward
 
 app = Flask(__name__, template_folder='templates', static_folder="static")
 app.secret_key = 'SuperKey'
@@ -20,6 +21,7 @@ app.register_blueprint(blueprint_basket, url_prefix='/basket')
 app.register_blueprint(blueprint_catalog, url_prefix='/catalog')
 app.register_blueprint(blueprint_orderlist, url_prefix='/orderlist')
 app.register_blueprint(blueprint_patient, url_prefix='/patient')
+app.register_blueprint(blueprint_ward, url_prefix='/ward')
 
 
 
