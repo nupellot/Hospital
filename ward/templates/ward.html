@@ -2,19 +2,27 @@
 
 {% block ward %}
 
+    <link rel="stylesheet" href="{{ url_for('bp_ward.static', filename='ward.css') }}">
+
 <div class="title-block">
-    <div class="main-ward">
-        {% if ward %}
-        {{ ward["id_department"] }}-{{ ward["id_ward"] }}
-        {% if ward["wtype"] == "VIP" %}
-            <span class="vip-badge">VIP</span>
-        {% endif %}
-        - {{ ward["department_name"] }} - {{ ward["floor"] }} этаж.
-        Заполненность: {{ ward["occupancy"] }}/{{ ward["capacity"] }}
-        {% else %}
-            Информации о палате не найдено
-        {% endif %}
+    {% if ward %}
+
+    <div class="main-info">
+    {{ ward["id_department"] }}-{{ ward["id_ward"] }}
+
+    {% if ward["wtype"] == "VIP" %}
+        <span class="vip-badge">VIP</span>
+    {% endif %}
+
+    - {{ ward["department_name"] }}, {{ ward["floor"] }} этаж.
     </div>
+
+    <div class="occupancy">{{ ward["occupancy"] }}/{{ ward["capacity"] }}</div>
+
+    {% else %}
+        Информации о палате не найдено
+
+    {% endif %}
 </div>
 
 {% endblock %}

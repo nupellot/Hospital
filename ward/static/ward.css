@@ -1,0 +1,27 @@
+.title-block {
+    width: 100%;
+    /*outline: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    font-weight: 500;
+    /*align-items: center;*/
+}
+
+.title-block > * {
+    /*outline: 1px solid lime;*/
+}
+
+.main-info, .occupancy {
+    display: flex;
+    align-items: center;
+}
+
+.vip-badge {
+    font-size: 0.6rem;
+    color: white;
+    background: #ffc11b;
+    border-radius: 3px;
+    padding: 5px 10px 5px 10px;
+    margin: 5px;
+}
