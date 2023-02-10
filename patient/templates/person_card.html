@@ -7,7 +7,7 @@
     <div class="title-login">LOGIN: {{ session["login"] }}</div>
     <div class="title-role title-{{ session["role"] }}">{{ session["role"] }}</div>
     {% if session["location"] %}
-        <a class="title-location" href="https://google.com">Содержится в палате {{ session["location"] }}</a>
+        <a class="title-location" href="/ward/{{ session["location"] }}">Содержится в палате {{ session["location"] }}</a>
     {% endif %}
 </div>
 {% endblock %}
