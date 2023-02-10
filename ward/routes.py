@@ -25,13 +25,16 @@ def specific_ward(department_id, ward_id):
         sql_for_ward = provider.get("ward.sql", id_ward=ward_id, id_department=department_id)
         # print("sql_for_stories:", sql_for_stories)
         ward = select_dict(current_app.config['db_config'], sql_for_ward)
-        # print("ward:", ward)
+        print("ward:", ward)
         if ward:
-            ward = ward[0]
+            # ward = ward[0]
             sql_for_occupancy = provider.get("occupancy.sql", id_ward=ward_id, id_department=department_id)
-            ward["occupancy"] = select_dict(current_app.config['db_config'], sql_for_occupancy)[0]["amount"]
+            # print("kek", select_dict(current_app.config['db_config'], sql_for_occupancy))
+            ward[0]["occupancy"] = select_dict(current_app.config['db_config'], sql_for_occupancy)[0]["amount"]
 
-
+        for patient in ward:
+            patient["image"] = url_for("static", filename="user_photos/" + patient["image"])
+        print("ward:", ward)
 # ward["occupancy"]
         # print("ward:", ward)
         # return "kek"
