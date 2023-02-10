@@ -4,8 +4,16 @@
 
 <div class="title-block">
     <div class="main-ward">
-        Палата {{ ward["id_department"] }}-{{ ward["id_ward"] }} - {{ ward["department_name"] }} - {{ ward["floor"] }} этаж.
+        {% if ward %}
+        {{ ward["id_department"] }}-{{ ward["id_ward"] }}
+        {% if ward["wtype"] == "VIP" %}
+            <span class="vip-badge">VIP</span>
+        {% endif %}
+        - {{ ward["department_name"] }} - {{ ward["floor"] }} этаж.
         Заполненность: {{ ward["occupancy"] }}/{{ ward["capacity"] }}
+        {% else %}
+            Информации о палате не найдено
+        {% endif %}
     </div>
 </div>
 
