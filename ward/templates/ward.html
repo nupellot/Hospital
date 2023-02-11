@@ -4,8 +4,9 @@
 
     <link rel="stylesheet" href="{{ url_for('bp_ward.static', filename='ward.css') }}">
 
+{% if ward %}
 <div class="title-block">
-    {% if ward %}
+
 
     <div class="main-info">
         <span class="ward-number">{{ ward[0]["id_department"] }}-{{ ward[0]["id_ward"] }}, </span>
@@ -18,10 +19,6 @@
 
     <div class="occupancy">{{ ward[0]["occupancy"] }}/{{ ward[0]["capacity"] }}</div>
 
-    {% else %}
-        Информации о палате не найдено
-
-    {% endif %}
 </div>
 
     <div class="patients-title">Пациенты</div>
@@ -42,5 +39,9 @@
     
 {% endfor %}
 </div>
+
+{% else %}
+    Информации о палате не найдено
+{% endif %}
 
 {% endblock %}
