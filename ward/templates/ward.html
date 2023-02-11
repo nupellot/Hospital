@@ -29,7 +29,7 @@
 <div class="patient-list">
 {% for patient in ward %}
     
-    <a class="patient-card">
+    <a class="patient-card flowing" href="/patient/{{ patient["login"] }}">
         <img src="{{ patient["image"] }}" alt="" class="patient-photo">
         <div class="patient-info">
             <div class="patient-name">{{ patient["surname"] }} {{ patient["name"] }} {% if patient["patronymic"] %} {{ patient["patronymic"] }} {% endif %}</div>
