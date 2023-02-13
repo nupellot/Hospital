@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block all_wards %}
+
+    <link rel="stylesheet" href="{{ url_for('bp_ward.static', filename='all_wards.css') }}">
+
+<div class="title">Общая структура больницы</div>
+
+{% for department in departments %}
+
+<div class="department-block">
+    <div class="department-title">{{ department["department_name"] }}</div>
+    {% for ward in department["wards"] %}
+
+        <div class="ward-block">
+            <div class="ward-number">
+                Палата {{ department["id_department"] }}-{{ ward["id_ward"] }}
+                {% if ward["wtype"] == "VIP" %} <div class="vip-badge">VIP</div> {% endif %}
+            </div>
+            <div class="warp-occupancy">
+                {{ ward["ward_occupancy"] }}/{{ ward["capacity"] }}
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+
+{% endfor %}
+
+{% endblock %}
