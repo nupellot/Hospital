@@ -1,0 +1,58 @@
+.title {
+    font-size: 1.5rem;
+}
+
+.department-title {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.department-block {
+    width: 100%;
+    /*outline: 1px solid pink;*/
+    margin-top: 20px;
+    /*display: grid;*/
+    /*grid-template-rows: 100px;*/
+}
+
+.department-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.department-name {
+    font-size: 1.3rem;
+}
+
+.ward-block {
+    max-width: 100%;
+    /*outline: 5px solid #c531ff;*/
+    box-shadow: 0 1px .625rem 0 hsla(210, 7%, 0%, .16), 0 .125rem .25rem 0 hsla(210, 7%, 22%, .08);
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.ward-number {
+    display: flex;
+    align-items: center;
+}
+
+.vip-badge {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: white;
+    background: #ffc11b;
+    border-radius: 3px;
+    padding: 3px 7px 3px 7px;
+    margin: 7px;
+}
+
