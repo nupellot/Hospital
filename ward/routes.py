@@ -15,11 +15,11 @@ blueprint_ward = Blueprint('bp_ward', __name__, template_folder='templates', sta
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
-# Обрабатываем страницу с информацией о пользователе.
+# Обрабатываем страницу с информацией о конкретной палате.
 @blueprint_ward.route('/<int:department_id>-<int:ward_id>', methods=['GET', 'POST'])
 def specific_ward(department_id, ward_id):
-    if session["login"] == "patient":
-        return "Отказано в доступе"
+    # if session["role"] == "patient":
+    #     return "Отказано в доступе"
 
     if request.method == 'GET':
         sql_for_ward = provider.get("ward.sql", id_ward=ward_id, id_department=department_id)
@@ -32,49 +32,54 @@ def specific_ward(department_id, ward_id):
             # print("kek", select_dict(current_app.config['db_config'], sql_for_occupancy))
             ward[0]["occupancy"] = select_dict(current_app.config['db_config'], sql_for_occupancy)[0]["amount"]
 
+        # Исправляем адреса для аватарок.
         for patient in ward:
             patient["image"] = url_for("static", filename="user_photos/" + patient["image"])
         print("ward:", ward)
-# ward["occupancy"]
-        # print("ward:", ward)
-        # return "kek"
-        # if session["role"] == "patient":
-        #     sql_for_location = provider.get("location.sql", id_patient=session["id_patient"])
-        #     location = select_dict(current_app.config['db_config'], sql_for_location)
-        #     print("location:", location)
-        #     if location:
-        #         location = location[0]  # Человек может находиться только в одной палате одновременно.
-        #         session["location"] = str(location["id_department"]) + "-" + str(location["id_ward"])
 
         return render_template('ward.html', ward=ward, session=session)
     else:
         return "LOL KEK ERROR"
 
 
-# # Обрабатываем страницу с информацией о конкретной палате.
-# @blueprint_ward.route('/<int:department_id>-<int:ward_id>', methods=['GET', 'POST'])
-# def specific_ward(department_id, ward_id):
-#     return "lol"
-#     # if user_login != session["login"]:
-#     #     return "Отказано в доступе"
-#     #
-#     # if request.method == 'GET':
-#     #     sql_for_stories = provider.get("stories.sql", login=user_login)
-#     #     # print("sql_for_stories:", sql_for_stories)
-#     #     stories = select_dict(current_app.config['db_config'], sql_for_stories)
-#     #     print("stories:", stories)
-#     #
-#     #     if session["role"] == "patient":
-#     #         sql_for_location = provider.get("location.sql", id_patient=session["id_patient"])
-#     #         location = select_dict(current_app.config['db_config'], sql_for_location)
-#     #         print("location:", location)
-#     #         if location:
-#     #             location = location[0]  # Человек может находиться только в одной палате одновременно.
-#     #             session["location"] = str(location["id_department"]) + "-" + str(location["id_ward"])
-#     #
-#     #     return render_template('patient.html', session=session, stories=stories)
-#     # else:
-#     #     return "LOL KEK ERROR"
+# Обрабатываем страницу с информацией о всех палатах
+@blueprint_ward.route('/', methods=['GET', 'POST'])
+def wards_list():
+    if session["login"] == "patient":
+        return "Отказано в доступе"
+
+    if request.method == 'GET':
+        # Запрос, в котором мы получаем общую информацию обо всех отделениях и их палатах.
+        # sql_for_all_wards = provider.get("all_wards.sql")
+        # # print("sql_for_stories:", sql_for_stories)
+        # all_wards = select_dict(current_app.config['db_config'], sql_for_all_wards)
+        # print("all_wards:", all_wards)
+
+        # Запрос, в котором мы получаем информацию о заполненности всех отделений.
+        sql_for_departments_occupancy = provider.get("departments_occupancy.sql")
+        # print("sql_for_stories:", sql_for_stories)
+        departments_occupancy = select_dict(current_app.config['db_config'], sql_for_departments_occupancy)
+        # print("departments_occupancy:", departments_occupancy)
+
+        # Запрос, в котором мы получаем информацию о заполненности всех палат.
+        sql_for_wards_occupancy = provider.get("wards_occupancy.sql")
+        # print("sql_for_stories:", sql_for_stories)
+        wards_occupancy = select_dict(current_app.config['db_config'], sql_for_wards_occupancy)
+        # print("wards_occupancy:", wards_occupancy)
+
+        # Теперь хитро склеиваем все предыдущие результаты для того, чтобы передать всё на фронт одной переменной.
+        departments = departments_occupancy
+        for department in departments:
+            department["wards"] = []
+            for ward in wards_occupancy:
+                if ward["id_department"] == department["id_department"]:
+                    department["wards"].append(ward)
+
+        print("departments:", departments)
+
+    return render_template('all_wards.html', departments=departments, session=session)
+
+
 
 
 
