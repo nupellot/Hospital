@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='plus.png') }}" type="image/x-icon">
 </head>
 <body>
 
@@ -10,7 +11,7 @@
     <header class="header">
         <div class="header-inner-container">
             <a class="title" href="{{ url_for('bp_patient.main', user_login = session["login"]) }}">
-                <img class="plus-icon" src="{{ url_for("bp_patient.static", filename="plus.png") }}">
+                <img class="plus-icon" src="{{ url_for("static", filename="plus.png") }}">
                 <div class="title-text">Hospital</div>
             </a>
             <a href="{{ url_for("bp_patient.settings", user_login = session["login"]) }}" class="user-info">
