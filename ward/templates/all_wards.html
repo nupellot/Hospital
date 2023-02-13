@@ -6,25 +6,35 @@
 
 <div class="title">Общая структура больницы</div>
 
+
+
+<div class="department-container">
 {% for department in departments %}
 
 <div class="department-block">
-    <div class="department-title">{{ department["department_name"] }}</div>
+    <div class="department-title">
+        <div class="department-name">{{ department["department_name"] }}</div>
+        <div class="department-occupancy">Заполненность: {{ department["department_occupancy"] }}/{{ department["department_capacity"] }}</div>
+
+    </div>
+
     {% for ward in department["wards"] %}
 
-        <div class="ward-block">
-            <div class="ward-number">
-                Палата {{ department["id_department"] }}-{{ ward["id_ward"] }}
-                {% if ward["wtype"] == "VIP" %} <div class="vip-badge">VIP</div> {% endif %}
-            </div>
-            <div class="warp-occupancy">
-                {{ ward["ward_occupancy"] }}/{{ ward["capacity"] }}
-            </div>
+    <a class="ward-block flowing" href="/ward/{{ department["id_department"] }}-{{ ward["id_ward"] }}">
+        <div class="ward-number">
+            Палата {{ department["id_department"] }}-{{ ward["id_ward"] }}
+            {% if ward["wtype"] == "VIP" %} <span class="vip-badge">VIP</span> {% endif %}
         </div>
+        <div class="warp-occupancy">
+            {{ ward["ward_occupancy"] }}/{{ ward["capacity"] }}
+        </div>
+    </a>
 
     {% endfor %}
 </div>
 
 {% endfor %}
+</div>
+
 
 {% endblock %}
