@@ -73,6 +73,8 @@ def wards_list():
             department["wards"] = []
             for ward in wards_occupancy:
                 if ward["id_department"] == department["id_department"]:
+                    if not ward["ward_occupancy"]:
+                        ward["ward_occupancy"] = 0
                     department["wards"].append(ward)
 
         print("departments:", departments)
