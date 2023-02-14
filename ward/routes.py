@@ -49,12 +49,6 @@ def wards_list():
         return "Отказано в доступе"
 
     if request.method == 'GET':
-        # Запрос, в котором мы получаем общую информацию обо всех отделениях и их палатах.
-        # sql_for_all_wards = provider.get("all_wards.sql")
-        # # print("sql_for_stories:", sql_for_stories)
-        # all_wards = select_dict(current_app.config['db_config'], sql_for_all_wards)
-        # print("all_wards:", all_wards)
-
         # Запрос, в котором мы получаем информацию о заполненности всех отделений.
         sql_for_departments_occupancy = provider.get("departments_occupancy.sql")
         # print("sql_for_stories:", sql_for_stories)
@@ -73,7 +67,7 @@ def wards_list():
             department["wards"] = []
             for ward in wards_occupancy:
                 if ward["id_department"] == department["id_department"]:
-                    if not ward["ward_occupancy"]:
+                    if not ward["ward_occupancy"]:  # Избавляемся от надписи None для пустых палат.
                         ward["ward_occupancy"] = 0
                     department["wards"].append(ward)
 
