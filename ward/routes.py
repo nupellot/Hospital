@@ -60,16 +60,38 @@ def wards_list():
         # print("sql_for_stories:", sql_for_stories)
         wards_occupancy = select_dict(current_app.config['db_config'], sql_for_wards_occupancy)
         # print("wards_occupancy:", wards_occupancy)
+        
+        # Запрос, в котором мы получаем информацию о главах каждого отделения.
+        sql_for_departments_heads = provider.get("departments_heads.sql")
+        # print("sql_for_stories:", sql_for_stories)
+        departments_heads = select_dict(current_app.config['db_config'], sql_for_departments_heads)
+        print("departments_heads:", departments_heads)
+        
+        # Запрос, в котором мы получаем информацию о врачах каждого отделения.
+        sql_for_departments_doctors = provider.get("departments_doctors.sql")
+        # print("sql_for_stories:", sql_for_stories)
+        departments_doctors = select_dict(current_app.config['db_config'], sql_for_departments_doctors)
+        print("departments_doctors:", departments_doctors)
 
         # Теперь хитро склеиваем все предыдущие результаты для того, чтобы передать всё на фронт одной переменной.
         departments = departments_occupancy
         for department in departments:
+            # Приклеиваем информацию о палатах.
             department["wards"] = []
             for ward in wards_occupancy:
                 if ward["id_department"] == department["id_department"]:
                     if not ward["ward_occupancy"]:  # Избавляемся от надписи None для пустых палат.
                         ward["ward_occupancy"] = 0
                     department["wards"].append(ward)
+            # Приклеиваем информацию о главе департамента.
+            for doctor in departments_doctors:
+                if doctor["id_department"] == department["id_department"]:
+                    department["department_head"] = doctor
+            # Приклеиваем информацию о врачах отделения.
+            department["doctors"] = []
+            for doctor in departments_doctors:
+                if doctor["id_department"] == department["id_department"]:
+                    department["doctors"].append(doctor)
 
         print("departments:", departments)
 

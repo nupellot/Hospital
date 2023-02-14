@@ -4,7 +4,7 @@
 
     <link rel="stylesheet" href="{{ url_for('bp_ward.static', filename='all_wards.css') }}">
 
-<div class="title">Общая структура больницы</div>
+<div class="main-title">Общая структура больницы</div>
 
 
 
@@ -15,22 +15,48 @@
     <div class="department-title">
         <div class="department-name">{{ department["department_name"] }}</div>
         <div class="department-occupancy">Заполненность: {{ department["department_occupancy"] }}/{{ department["department_capacity"] }}</div>
-
     </div>
 
-    {% for ward in department["wards"] %}
+    <div class="ward-title mid-title">Палаты</div>
 
-    <a class="ward-block flowing" href="/ward/{{ department["id_department"] }}-{{ ward["id_ward"] }}">
-        <div class="ward-number">
-            Палата {{ department["id_department"] }}-{{ ward["id_ward"] }}
-            {% if ward["wtype"] == "VIP" %} <span class="vip-badge">VIP</span> {% endif %}
-        </div>
-        <div class="warp-occupancy">
-            {{ ward["ward_occupancy"] }}/{{ ward["capacity"] }}
-        </div>
-    </a>
+    <div class="wards-container">
+        {% for ward in department["wards"] %}
 
-    {% endfor %}
+        <a class="ward-block flowing" href="/ward/{{ department["id_department"] }}-{{ ward["id_ward"] }}">
+            <div class="ward-number">
+                № {{ department["id_department"] }}-{{ ward["id_ward"] }}
+                {% if ward["wtype"] == "VIP" %} <span class="vip-badge">VIP</span> {% endif %}
+            </div>
+            <div class="warp-occupancy">
+                    {{ ward["ward_occupancy"] }}/{{ ward["capacity"] }}
+            </div>
+        </a>
+
+        {% endfor %}
+    </div>
+
+
+    <div class="head-title mid-title">Заведующий</div>
+    <div class="department-head doctor-block flowing">{{ department["department_head"]["surname"] }} {{ department["department_head"]["name"][0] }}. {% if department["department_head"]["patronymic"] %} {{ department["department_head"]["patronymic"][0] }}. {% endif %}</div>
+
+    <div class="doctors-title mid-title">Врачи</div>
+
+    <div class="doctors-container">
+        {% for doctor in department["doctors"] %}
+
+        <a href="" class="doctor-block flowing">
+            <span class="doctor-name-and-specialization">
+                <span class="doctor-name">{{ doctor["surname"] }} {{ doctor["name"][0] }}. {% if doctor["patronymic"] %} {{ doctor["patronymic"][0] }}. {% endif %}</span>
+                <span class="doctor-specialization">- {{ doctor["specialization"] }}</span>
+            </span>
+            <span class="doctor-occupancy">Пациентов: {{ doctor["doctor_occupancy"] }}</span>
+        </a>
+
+        {% endfor %}
+    </div>
+
+
+
 </div>
 
 {% endfor %}
