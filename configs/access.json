@@ -1,0 +1,12 @@
+{
+  "typical": [
+    "blueprint_report"
+  ],
+  "admin": [
+    "blueprint_market",
+    "bp_orderlist"
+  ],
+  "external": [
+    "blueprint_market"
+  ]
+}
