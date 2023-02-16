@@ -36,7 +36,7 @@ def person(user_login):
                 location = location[0]  # Человек может находиться только в одной палате одновременно.
                 session["location"] = str(location["id_department"]) + "-" + str(location["id_ward"])
 
-        return render_template('patient.html', session=session, stories=stories)
+        return render_template('person.html', session=session, stories=stories)
     else:
         return "LOL KEK ERROR"
 
