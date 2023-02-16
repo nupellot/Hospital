@@ -11,13 +11,14 @@ from database.operations import select_dict
 from database.sql_provider import SQLProvider
 
 
-blueprint_patient = Blueprint('bp_patient', __name__, template_folder='templates', static_folder='static')
+blueprint_person = Blueprint('bp_person', __name__, template_folder='templates', static_folder="static")
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
 # Обрабатываем страницу с информацией о пользователе.
-@blueprint_patient.route('/<string:user_login>', methods=['GET', 'POST'])
-def main(user_login):
+@blueprint_person.route('/<string:user_login>', methods=['GET', 'POST'])
+def person(user_login):
+    # return blueprint_patient.static_folder
     if user_login != session["login"]:
         return "Отказано в доступе"
 
@@ -41,7 +42,7 @@ def main(user_login):
 
 
 # Обрабатываем страницу настроек.
-@blueprint_patient.route('/<string:user_login>/settings', methods=['GET', 'POST'])
+@blueprint_person.route('/<string:user_login>/settings', methods=['GET', 'POST'])
 def settings(user_login):
     if request.method == 'GET':
         return render_template('settings.html', session=session)

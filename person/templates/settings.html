@@ -3,7 +3,7 @@
 {% block settings %}
 
 <title>Настройки</title>
-<link rel="stylesheet" href="{{ url_for('bp_patient.static', filename='settings.css') }}">
+<link rel="stylesheet" href="{{ url_for('bp_person.static', filename='settings.css') }}">
 
 
 {% include 'person_card.html' %}
@@ -40,6 +40,7 @@
     </label>
 
     {% if session["role"] != "patient" %}
+
     <label for="" class="specialization">
         <div class="field-name">Специализация</div>
         <input type="text" readonly value="{{ session["specialization"] }}" class="specialization">
@@ -60,6 +61,7 @@
         <input type="text" readonly value="Всё ещё на службе" class="dismissal-date">
         {% endif %}
     </label>
+        
     {% endif %}
 </form>
 

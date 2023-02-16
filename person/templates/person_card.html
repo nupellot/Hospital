@@ -1,7 +1,7 @@
 {% block person_card %}
 
 <div class="person-card">
-<link rel="stylesheet" href="{{ url_for('bp_patient.static', filename='person_card.css') }}">
+<link rel="stylesheet" href="{{ url_for('bp_person.static', filename="person_card.css") }}">
     <img src="{{ session["image"] }}" alt="" class="title-image">
     <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
     <div class="title-login">LOGIN: {{ session["login"] }}</div>
