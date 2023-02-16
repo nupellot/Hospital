@@ -92,8 +92,13 @@ def render_patient(user_login):
 
     # Добавляем к данным о пациенте его фотографию.
     patient["image"] = url_for("static", filename="user_photos") + "/" + patient["image"]
+    for story in patient["stories"]:
+        # Добавляем к данным об историях фото лечащих врачей.
+        story["image"] = url_for("static", filename="user_photos") + "/" + story["image"]
+        # Добавляем к данным о пациенте информацию о его местонахождении.
+        story["location"] = str(story["id_department"]) + "-" + str(story["id_ward"])
 
-    #
+    # Для единообразия фронтенда добавляем пациенту роль.
     patient["role"] = "patient"
 
     print("patient: ", patient)
