@@ -65,13 +65,13 @@ def wards_list():
         sql_for_departments_heads = provider.get("departments_heads.sql")
         # print("sql_for_stories:", sql_for_stories)
         departments_heads = select_dict(current_app.config['db_config'], sql_for_departments_heads)
-        print("departments_heads:", departments_heads)
+        # print("departments_heads:", departments_heads)
         
         # Запрос, в котором мы получаем информацию о врачах каждого отделения.
         sql_for_departments_doctors = provider.get("departments_doctors.sql")
         # print("sql_for_stories:", sql_for_stories)
         departments_doctors = select_dict(current_app.config['db_config'], sql_for_departments_doctors)
-        print("departments_doctors:", departments_doctors)
+        # print("departments_doctors:", departments_doctors)
 
         # Теперь хитро склеиваем все предыдущие результаты для того, чтобы передать всё на фронт одной переменной.
         departments = departments_occupancy
@@ -93,7 +93,7 @@ def wards_list():
                 if doctor["id_department"] == department["id_department"]:
                     department["doctors"].append(doctor)
 
-        print("departments:", departments)
+        # print("departments:", departments)
 
     return render_template('all_wards.html', departments=departments, session=session)
 
