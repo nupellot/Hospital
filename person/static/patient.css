@@ -1,28 +1,43 @@
 .stories-container {
-    outline: 1px solid red;
+    /*outline: 1px solid red;*/
     margin-top: 10px;
+    border-radius: inherit;
 }
 
 .story {
-    outline: 1px solid blue;
+    border-radius: inherit;
+    /*outline: 1px solid blue;*/
+    border: 1px solid rgba(121, 121, 121, 0.66);
+    padding: 5px 15px 5px 15px;
+    margin-top: 20px;
+    background: #f1f1f1;
 }
 
 .story-header {
-    width: 100%;
+    max-width: 100%;
     display: grid;
     grid-template-columns: 10fr 1fr;
+    margin-top: 10px;
+    border-radius: inherit;
+    /*border: 2px solid rgba(180, 255, 180, 0.61);*/
+    padding-left: 10px;
 }
 
 .story-info {
-    outline: 1px solid green;
-    justify-content: space-around;
+    /*outline: 1px solid green;*/
+    justify-content: center;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    /*padding: 20px;*/
+    border-radius: inherit;
 }
 
 .story-doctor-image {
     width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: inherit;
+    margin-left: 15px;
 }
 
 .story-upper-line {
@@ -35,6 +50,7 @@
     font-size: 1rem;
     font-weight: 500;
     /*outline: 2px solid cyan;*/
+    border-radius: inherit;
 }
 
 .story-upper-line > .story-dates {
@@ -57,4 +73,47 @@
     align-items: center;
     font-weight: 500;
     font-size: 1rem;
+    border-radius: inherit;
 }
+
+
+.surveys-container {
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    border-radius: inherit;
+}
+
+.survey {
+    /*outline: 1px solid cyan;*/
+    margin-top: 10px;
+    /*border: 1px solid gray;*/
+    border-top: 3px solid gray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*border-radius: inherit;*/
+}
+
+.survey-upper-line {
+    display: flex;
+    justify-content: space-between;
+    /*outline: 1px solid red;*/
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.no-surveys {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.surveys-title {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+
+

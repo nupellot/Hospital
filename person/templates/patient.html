@@ -50,6 +50,9 @@
             <img src="{{ story["image"] }}" alt="Фото лечащего врача" class="story-doctor-image">
         </div>
 
+        {% if story["surveys"] %}
+
+        <div class="surveys-title">Проведенные осмотры:</div>
         <div class="surveys-container">
 
             {% for survey in story["surveys"] %}
@@ -57,7 +60,7 @@
             <div class="survey">
                 <div class="survey-upper-line">
                     <span class="survey-date">
-                        {{ survey["date"] }}
+                        Дата осмотра: {{ survey["date"] }}
                     </span>
                     <span class="survey-doctor">
                         {{ survey["surname"] }}
@@ -74,6 +77,11 @@
 
             {% endfor %}
 
+        {% else %}
+            <div class="no-surveys">
+                Нет информации о проведенных осмотрах
+            </div>
+        {% endif %}
         </div>
     </div>
 
