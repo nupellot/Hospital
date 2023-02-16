@@ -92,6 +92,7 @@ def render_patient(user_login):
 
     # Добавляем к данным о пациенте его фотографию.
     patient["image"] = url_for("static", filename="user_photos") + "/" + patient["image"]
+
     for story in patient["stories"]:
         # Добавляем к данным об историях фото лечащих врачей.
         story["image"] = url_for("static", filename="user_photos") + "/" + story["image"]
@@ -110,7 +111,35 @@ def render_patient(user_login):
 @blueprint_person.route('/<string:user_login>/settings', methods=['GET', 'POST'])
 def settings(user_login):
     if request.method == 'GET':
-        return render_template('settings.html', session=session)
+        # Получаем информацию о текущем пациенте.
+        sql_for_patient = provider.get("patient.sql", login=user_login)
+        # print("sql_for_patient:", sql_for_patient)
+        patient = select_dict(current_app.config['db_config'], sql_for_patient)
+        # print("patient:", patient)
+
+        # Превращаем массив пациентов в одного пациента.
+        if len(patient) != 1:
+            return "You have multiple patients with the same login!"
+        else:
+            patient = patient[0]
+
+        # Добавляем к данным о пациенте информацию о его местонахождении.
+        sql_for_location = provider.get("location.sql", id_patient=patient["id_patient"])
+        location = select_dict(current_app.config['db_config'], sql_for_location)
+        print("location:", location)
+        if location:
+            if len(location) != 1:
+                return "This patient is in two locations simultaneously"
+            location = location[0]  # Человек может находиться только в одной палате одновременно.
+            patient["location"] = str(location["id_department"]) + "-" + str(location["id_ward"])
+
+        # Добавляем к данным о пациенте его фотографию.
+        patient["image"] = url_for("static", filename="user_photos") + "/" + patient["image"]
+
+        # Для единообразия фронтенда добавляем пациенту роль.
+        patient["role"] = "patient"
+
+        return render_template('settings.html', session=session, person=patient)
     else:
         return "LOL KEK ERROR"
 
