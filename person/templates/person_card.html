@@ -2,12 +2,12 @@
 
 <div class="person-card">
 <link rel="stylesheet" href="{{ url_for('bp_person.static', filename="person_card.css") }}">
-    <img src="{{ session["image"] }}" alt="" class="title-image">
-    <div class="title-name">{{ session["surname"] }} {{ session["name"] }} {{ session["patronymic"] }}</div>
-    <div class="title-login">LOGIN: {{ session["login"] }}</div>
-    <div class="title-role title-{{ session["role"] }}">{{ session["role"] }}</div>
-    {% if session["location"] %}
-        <a class="title-location" href="/ward/{{ session["location"] }}">Содержится в палате {{ session["location"] }}</a>
+    <img src="{{ person["image"] }}" alt="" class="title-image">
+    <div class="title-name">{{ person["surname"] }} {{ person["name"] }} {{ person["patronymic"] }}</div>
+    <div class="title-login">LOGIN: {{ person["login"] }}</div>
+    <div class="title-role title-{{ person["role"] }}">{{ person["role"] }}</div>
+    {% if person["location"] %}
+        <a class="title-location" href="/ward/{{ person["location"] }}">Содержится в палате {{ person["location"] }}</a>
     {% endif %}
 </div>
 {% endblock %}
