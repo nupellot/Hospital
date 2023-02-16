@@ -10,7 +10,7 @@
 .doctors-container, .wards-container {
     padding: 15px;
     border-radius: inherit;
-    box-shadow: 0 1px .625rem 0 hsla(210, 7%, 0%, .16), 0 .125rem .25rem 0 hsla(210, 7%, 22%, .08);
+    box-shadow: 0 1px .625rem 0 hsla(210, 7%, 0%, .6), 0 .125rem .25rem 0 hsla(210, 7%, 22%, .08);
 }
 
 .department-title {
