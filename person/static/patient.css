@@ -1,0 +1,60 @@
+.stories-container {
+    outline: 1px solid red;
+    margin-top: 10px;
+}
+
+.story {
+    outline: 1px solid blue;
+}
+
+.story-header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+}
+
+.story-info {
+    outline: 1px solid green;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.story-doctor-image {
+    width: 100px;
+}
+
+.story-upper-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*border-bottom: 1px solid #2c2c2c;*/
+    /*padding: 10px;*/
+    height: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    /*outline: 2px solid cyan;*/
+}
+
+.story-upper-line > .story-dates {
+    display: flex;
+    align-items: center;
+}
+
+.story-dates > .story-reg-date {
+    margin-right: 15px;
+}
+
+.story-dates > .story-discharge-date {
+    margin-left: 15px;
+}
+
+.story-lower-line {
+    /*outline: 2px solid cyan;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1rem;
+}
