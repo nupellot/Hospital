@@ -79,7 +79,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     font-weight: 500;
-    padding: 10px;
+    padding: 20px;
 }
 
 .patient-diagnosis {
