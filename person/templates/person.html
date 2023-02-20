@@ -82,10 +82,10 @@
                     <span class="story-diagnosis">
                         Диагноз: {{ story["diagnosis"] }}
                     </span>
-                    <div class="story-location">
+                    <a class="story-location" href="/ward/{{ story["id_department"] }}-{{ story["id_ward"] }}">
                         Палата
                         {{ story["location"] }}
-                    </div>
+                    </a>
                 </div>
                 <div class="story-lower-line">
                     <a class="story-doctor" href="/person/{{ story["login"] }}">
