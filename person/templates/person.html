@@ -60,6 +60,7 @@
             <img src="{{ story["image"] }}" alt="Фото лечащего врача" class="story-image">
         </div>
 
+
         {% elif person["role"] == "doctor" %}
 
         <div class="story-header">
@@ -105,11 +106,10 @@
                     </a>
                 </div>
             </div>
-            <img src="{{ story["patient_image"] }}" alt="Фото пациента" class="story-image">
+            <img src="{{ story["patient_image"] }}" alt="Фото пациента" class="story-image {% if story["id_doctor"] == person["id_doctor"] and person["role"] == "doctor" %} accent {% endif %}">
         </div>
 
         {% endif %}
-
 
 
         {% if story["surveys"] %}
@@ -119,7 +119,7 @@
 
                 {% for survey in story["surveys"] %}
 
-                    <div class="survey">
+                    <div class="survey {% if survey["id_doctor"] == person["id_doctor"] and person["role"] == "doctor" %} accent {% endif %}">
                         <div class="survey-upper-line">
                             <span class="survey-date">
                                 Дата осмотра: {{ survey["date"] }}

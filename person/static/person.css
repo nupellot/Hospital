@@ -95,9 +95,9 @@
     margin-top: 10px;
     /*border: 1px solid gray;*/
     border-top: 3px solid gray;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    /*border-radius: inherit;*/
+    padding: 10px;
+    /*padding-bottom: 5px;*/
+    border-radius: inherit;
 }
 
 .survey-upper-line {
@@ -119,6 +119,11 @@
 .surveys-title {
     font-weight: 700;
     font-size: 1rem;
+}
+
+
+.accent {
+    border: 3px solid rgb(10, 78, 187);
 }
 
 
