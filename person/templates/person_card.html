@@ -1,13 +1,29 @@
 {% block person_card %}
 
-<div class="person-card">
 <link rel="stylesheet" href="{{ url_for('bp_person.static', filename="person_card.css") }}">
+
+<div class="person-card">
     <img src="{{ person["image"] }}" alt="" class="title-image">
-    <div class="title-name">{{ person["surname"] }} {{ person["name"] }} {{ person["patronymic"] }}</div>
-    <div class="title-login">LOGIN: {{ person["login"] }}</div>
+    <div class="title-name">
+        {{ person["surname"] }}
+        {{ person["name"] }}
+            {% if person["patronymic"] %} {{ person["patronymic"] }}
+        {% endif %}
+    </div>
+    <div class="title-login-and-specialization">
+        {% if person["role"] == "doctor" %}
+            <span class="specialization">{{ person["specialization"] }}, </span>
+        {% endif %}
+        LOGIN: {{ person["login"] }}
+    </div>
     <div class="title-role title-{{ person["role"] }}">{{ person["role"] }}</div>
-    {% if person["location"] %}
-        <a class="title-location" href="/ward/{{ person["location"] }}">Содержится в палате {{ person["location"] }}</a>
-    {% endif %}
+    <a class="title-location" href="/ward/{{ person["location"] }}">
+        {% if person["role"] == "patient" %}
+            Содержится в палате {{ person["location"] }}
+        {% endif %}
+        {% if person["role"] == "doctor" %}
+            {{ person["department_name"] }} отделение
+        {% endif %}
+    </a>
 </div>
 {% endblock %}
