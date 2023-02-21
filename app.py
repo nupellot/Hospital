@@ -1,8 +1,11 @@
 import json
+import os
 
-from flask import Flask, render_template, session, request, redirect, url_for
+from flask import Flask, render_template, session, request, redirect, url_for, current_app
 from auth.routes import blueprint_auth
 from catalog.routes import blueprint_catalog
+from database.operations import select_dict
+from database.sql_provider import SQLProvider
 from market.routes import blueprint_market
 from orderlist.routes import blueprint_orderlist
 from report.routes import blueprint_report
@@ -29,10 +32,22 @@ app.config['access_config'] = json.load(open('configs/access.json'))
 app.config['cache_config'] = json.load(open('configs/cache.json'))
 
 
+provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
+
+
 @app.route('/', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def menu_choice():
-    return redirect(url_for("bp_person.person", user_login=session["login"]))
+    if session["role"] == "doctor":
+        # Получаем информацию обо всех пациентах, которые сейчас лежат в госпитале.
+        sql_for_active_patients = provider.get("active_patients.sql")
+        # print("sql_for_active_patients:", sql_for_active_patients)
+        active_patients = select_dict(current_app.config['db_config'], sql_for_active_patients)
+        print("active_patients:", active_patients)
+        
+        return render_template('dashboard.html', patients=active_patients)
+    else:
+        return redirect(url_for("bp_person.person", user_login=session["login"]))
     # return render_template("base.html", session=session, request=request)
     # if session.get('user_group', None):
     #     return render_template('internal_user_menu.html', session=session, request=request)
