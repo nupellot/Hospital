@@ -24,6 +24,9 @@
         {% if person["role"] == "doctor" %}
             {{ person["department_name"] }} отделение
         {% endif %}
+        {% if person["role"] == "registrator" %}
+            Регистратура
+        {% endif %}
     </a>
 </div>
 {% endblock %}
