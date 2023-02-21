@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block dashboard %}
+
+<title>Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+
+<div class="make-survey-title">Провести осмотр</div>
+<div class="make-survey-block">
+    <select name="" id="" class="patient-selection">
+        {% for patient in patients %}
+            <option value="{{ patient["id_patient"] }}">
+                {{ patient["surname"] }}
+                {{ patient["name"] }}
+                {% if patient["patronymic"] %}
+                    {{ patient["patronymic"] }}
+                {% endif %},
+
+                Палата {{ patient["id_department"] }}-{{ patient["id_ward"] }},
+                {{ patient["diagnosis"] }}
+            </option>
+        {% endfor %}
+    </select>
+    <textarea name="" id="" cols="30" rows="10" class="survey-text-input"></textarea>
+</div>
+
+
+
+
+{% endblock %}
