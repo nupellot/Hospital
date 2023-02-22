@@ -6,8 +6,18 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 
 <div class="make-survey-title">Провести осмотр</div>
-<div class="make-survey-block">
-    <select name="" id="" class="patient-selection">
+
+{#<form class="SendForm" action="" method ="POST">#}
+{#    <label class="ProductNameLabel"  for="product">#}
+{#        <div class="Name">Введите дату</div>#}
+{#    </label>#}
+{#    <input class="ProductNameInput" name = year id="year" type = text placeholder="2022">#}
+{#    <input class="ProductNameInput" name = month id="month" type = text placeholder="09">#}
+{#    <input class="ProductNameSend" type = submit value ="Отправить">#}
+{#</form>#}
+
+<form class="make-survey-block" action="" method ="POST">
+    <select name="id_patient" id="" class="patient-selection">
         {% for patient in patients %}
             <option value="{{ patient["id_patient"] }}">
                 {{ patient["surname"] }}
@@ -18,11 +28,15 @@
 
                 Палата {{ patient["id_department"] }}-{{ patient["id_ward"] }},
                 {{ patient["diagnosis"] }}
+                {% if patient["story_doctor"] == session["id_doctor"] %}
+                    <<========== Ваш пациент!
+                {% endif %}
             </option>
         {% endfor %}
     </select>
-    <textarea name="" id="" cols="30" rows="10" class="survey-text-input"></textarea>
-</div>
+    <textarea name="survey_text" placeholder="рекомендации и предписания" id="" cols="30" rows="10" class="survey-text-input"></textarea>
+    <input type="submit" value="Отправить" class="make-survey-button">
+</form>
 
 
 
