@@ -41,15 +41,10 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 def menu_choice():
     if request.method == "GET":
         if session["role"] == "doctor":
-            # Получаем информацию обо всех пациентах, которые сейчас лежат в госпитале.
-            sql_for_active_patients = provider.get("active_patients.sql")
-            # print("sql_for_active_patients:", sql_for_active_patients)
-            active_patients = select_dict(current_app.config['db_config'], sql_for_active_patients)
-            print("active_patients:", active_patients)
-
-            return render_template('dashboard.html', patients=active_patients, session=session)
+            return render_doctor()
         else:
             return redirect(url_for("bp_person.person", user_login=session["login"]))
+
     if request.method == "POST":
         if session["role"] == "doctor":
             print("request.form.get(\"id_patient\"):", request.form.get("id_patient"))
@@ -66,20 +61,26 @@ def menu_choice():
                                               survey_doctor=session["id_doctor"],
                                               survey_story=survey_story_id)
 
-
             print("sql_for_new_survey:", sql_for_new_survey)
 
             with UseDatabase(current_app.config['db_config']) as cursor:
                 cursor.execute(sql_for_new_survey)
+            return render_doctor()
 
-
-        return "KEk"
+        else:
+            return "Unknown role"
     else:
         return "Unknown request.method"
-    # return render_template("base.html", session=session, request=request)
-    # if session.get('user_group', None):
-    #     return render_template('internal_user_menu.html', session=session, request=request)
-    # return render_template('external_user_menu.html')
+
+
+def render_doctor():
+    # Получаем информацию обо всех пациентах, которые сейчас лежат в госпитале.
+    sql_for_active_patients = provider.get("active_patients.sql")
+    # print("sql_for_active_patients:", sql_for_active_patients)
+    active_patients = select_dict(current_app.config['db_config'], sql_for_active_patients)
+    print("active_patients:", active_patients)
+
+    return render_template('dashboard.html', patients=active_patients, session=session)
 
 
 @app.route('/exit')
