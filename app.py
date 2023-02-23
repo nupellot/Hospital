@@ -47,9 +47,9 @@ def menu_choice():
 
     if request.method == "POST":
         if session["role"] == "doctor":
-            print("request.form.get(\"id_patient\"):", request.form.get("id_patient"))
+            # print("request.form.get(\"id_patient\"):", request.form.get("id_patient"))
             survey_patient = request.form.get("id_patient")
-            print("request.form.get(\"survey_text\"):", request.form.get("survey_text"))
+            # print("request.form.get(\"survey_text\"):", request.form.get("survey_text"))
             prescriptions = request.form.get("survey_text")
 
             sql_for_get_story_by_patient = provider.get("get_story_by_patient_id.sql", patient_id=survey_patient)
@@ -61,7 +61,7 @@ def menu_choice():
                                               survey_doctor=session["id_doctor"],
                                               survey_story=survey_story_id)
 
-            print("sql_for_new_survey:", sql_for_new_survey)
+            # print("sql_for_new_survey:", sql_for_new_survey)
 
             with UseDatabase(current_app.config['db_config']) as cursor:
                 cursor.execute(sql_for_new_survey)
@@ -80,7 +80,20 @@ def render_doctor():
     active_patients = select_dict(current_app.config['db_config'], sql_for_active_patients)
     print("active_patients:", active_patients)
 
-    return render_template('dashboard.html', patients=active_patients, session=session)
+    # Получаем информацию обо всех пациентах данного врача, которые сейчас лежат в госпитале.
+    sql_for_doctor_active_patients = provider.get("doctor_active_patients.sql", id_doctor=session["id_doctor"])
+    print("sql_for_doctor_active_patients:", sql_for_doctor_active_patients)
+    doctor_active_patients = select_dict(current_app.config['db_config'], sql_for_doctor_active_patients)
+    print("doctor_active_patients:", doctor_active_patients)
+
+    for patient in doctor_active_patients:
+        patient["location"] = str(patient["id_department"]) + "-" + str(patient["id_ward"])
+        patient["image"] = url_for("static", filename="user_photos") + "/" + patient["image"]
+
+    return render_template('dashboard.html',
+                           active_patients=active_patients,
+                           doctor_active_patients=doctor_active_patients,
+                           session=session)
 
 
 @app.route('/exit')
