@@ -18,15 +18,15 @@
 
 <form class="make-survey-block" action="" method ="POST">
     <select name="id_patient" id="" class="patient-selection">
-        {% for patient in patients %}
+        {% for patient in active_patients %}
             <option value="{{ patient["id_patient"] }}">
                 {{ patient["surname"] }}
                 {{ patient["name"] }}
                 {% if patient["patronymic"] %}
                     {{ patient["patronymic"] }}
-                {% endif %},
+                {% endif %}
 
-                Палата {{ patient["id_department"] }}-{{ patient["id_ward"] }},
+                , Палата {{ patient["id_department"] }}-{{ patient["id_ward"] }},
                 {{ patient["diagnosis"] }}
                 {% if patient["story_doctor"] == session["id_doctor"] %}
                     <<========== Ваш пациент!
@@ -37,6 +37,54 @@
     <textarea name="survey_text" placeholder="рекомендации и предписания" id="" cols="30" rows="10" class="survey-text-input"></textarea>
     <input type="submit" value="Отправить" class="make-survey-button">
 </form>
+
+
+<div class="patients-container">
+    <div class="patients-title">Ваши пациенты</div>
+    {% for patient in doctor_active_patients %}
+        <a href="/person/{{ patient["login"] }}" class="wrapping-link">
+            <form class="patient-container flowing" action="" method ="POST">
+                <div class="patient-card">
+                    <img class="patient-photo" src="{{ patient["image"] }}">
+                    <div class="patient-info">
+                        <div class="patient-upper-line">
+                            <span class="patient-name">
+                                {{ patient["surname"] }}
+                                {{ patient["name"] }}
+                                {% if patient["patronymic"] %}
+                                    {{ patient["patronymic"] }}
+                                {% endif %}
+                                <span class="patient-login">
+                                    LOGIN: {{ patient["login"] }}
+                                </span>
+                            </span>
+                            <span class="patient-location">
+                                Палата {{ patient["location"] }}
+                            </span>
+                        </div>
+                        <div class="patient-lower-line">
+                            <span class="patient-diagnosis">
+                                Диагноз: {{ patient["diagnosis"] }}
+                            </span>
+                            <span class="patient-reg-date">
+                                Дата поступления: {{ patient["reg_date"] }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="discharge-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="check" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M5 12l5 5l10 -10"></path>
+                    </svg>
+                    <span>ВЫПИСАТЬ</span>
+                </button>
+            </form>
+        </a>
+    {% endfor %}
+</div>
+
 
 
 
