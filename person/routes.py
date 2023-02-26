@@ -22,12 +22,13 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 def person(user_login):
     if request.method == 'GET':
         # print("session[role]: ", session["role"])
+        role = get_role(user_login)
 
-        if session["role"] == "doctor":
+        if role == "doctor":
             return render_template('person.html', session=session, person=render_doctor(user_login))
-        if session["role"] == "patient":
+        if role == "patient":
             return render_template('person.html', session=session, person=render_patient(user_login))
-        if session["role"] == "registrator":
+        if role == "registrator":
             return "Страницы регистратора пока нет ;("
 
         return "Kek"
@@ -35,14 +36,35 @@ def person(user_login):
         return "LOL KEK ERROR"
 
 
+def get_role(user_login):
+    sql_for_role_from_doctor = provider.get("role_from_doctor.sql", login=user_login)
+    role_from_doctor = select_dict(current_app.config['db_config'], sql_for_role_from_doctor)
+    
+    sql_for_patient_search = provider.get("patient_search.sql", login=user_login)
+    patient_search = select_dict(current_app.config['db_config'], sql_for_patient_search)
+
+    print("role_from_doctor:", role_from_doctor)
+    print("patient_search", patient_search)
+
+    if not role_from_doctor and not patient_search:  # Пользователь не найден.
+        return ""
+    elif not role_from_doctor:  # Пользователь - пациент.
+        return "patient"
+    else:  # Пользователь - доктор или регистратор.
+        if len(role_from_doctor) > 1:
+            print("ERROR: Больше одного человека с логином", user_login)
+        return role_from_doctor[0]["role"]
+
+
+
 def render_doctor(user_login):
     if request.method == 'GET':
 
         # Получаем информацию о текущем враче.
         sql_for_doctor = provider.get("doctor.sql", login=user_login)
-        print("sql_for_doctor:", sql_for_doctor)
+        # print("sql_for_doctor:", sql_for_doctor)
         doctor = select_dict(current_app.config['db_config'], sql_for_doctor)
-        print("doctor:", doctor)
+        # print("doctor:", doctor)
 
         # Превращаем массив докторов в одного доктора.
         if len(doctor) != 1:
