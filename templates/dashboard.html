@@ -36,6 +36,7 @@
     </select>
     <textarea name="survey_text" placeholder="рекомендации и предписания" id="" cols="30" rows="10" class="survey-text-input"></textarea>
     <input type="submit" value="Отправить" class="make-survey-button">
+    <input class="" type="hidden" name="is-survey-form" value="yes">
 </form>
 
 
@@ -73,13 +74,15 @@
                     </div>
                 </div>
 
-                <button class="discharge-button">
+                <button name="id_patient" value="{{ patient["id_patient"] }}" class="discharge-button">
                     <svg xmlns="http://www.w3.org/2000/svg" class="check" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                        <path d="M5 12l5 5l10 -10"></path>
                     </svg>
                     <span>ВЫПИСАТЬ</span>
                 </button>
+
+                <input class="" type="hidden" name="is-discharge-form" value="yes">
             </form>
         </a>
     {% endfor %}
