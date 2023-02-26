@@ -48,37 +48,40 @@ def menu_choice():
     if request.method == "POST":
         print("request.form", request.form)
         if session["role"] == "doctor":
-            if request.form.get("is-survey-form") == "yes":
-                # print("request.form.get(\"id_patient\"):", request.form.get("id_patient"))
-                survey_patient = request.form.get("id_patient")
-                # print("request.form.get(\"survey_text\"):", request.form.get("survey_text"))
-                prescriptions = request.form.get("survey_text")
-                sql_for_get_story_by_patient = provider.get("get_story_by_patient_id.sql",
-                                                            patient_id=survey_patient)
-                survey_story = select_dict(current_app.config['db_config'], sql_for_get_story_by_patient)
-                survey_story_id = survey_story[0]["id_story"]
-                sql_for_new_survey = provider.get("new_survey.sql",
-                                                  prescriptions=prescriptions,
-                                                  survey_doctor=session["id_doctor"],
-                                                  survey_story=survey_story_id)
-
-                with UseDatabase(current_app.config['db_config']) as cursor:
-                    cursor.execute(sql_for_new_survey)
-
-            if request.form.get("is-discharge-form") == "yes":
-                sql_for_discharge_patient = provider.get("discharge_patient.sql",
-                                                         patient_id=request.form.get("id_patient"))
-                with UseDatabase(current_app.config['db_config']) as cursor:
-                    print("sql_for_discharge_patient:", sql_for_discharge_patient)
-                    cursor.execute(sql_for_discharge_patient)
-
-            return render_doctor()
-
+            return process_doctor()
 
         else:
             return "Unknown role"
     else:
         return "Unknown request.method"
+
+
+def process_doctor():
+    if request.form.get("is-survey-form") == "yes":
+        # print("request.form.get(\"id_patient\"):", request.form.get("id_patient"))
+        survey_patient = request.form.get("id_patient")
+        # print("request.form.get(\"survey_text\"):", request.form.get("survey_text"))
+        prescriptions = request.form.get("survey_text")
+        sql_for_get_story_by_patient = provider.get("get_story_by_patient_id.sql",
+                                                    patient_id=survey_patient)
+        survey_story = select_dict(current_app.config['db_config'], sql_for_get_story_by_patient)
+        survey_story_id = survey_story[0]["id_story"]
+        sql_for_new_survey = provider.get("new_survey.sql",
+                                          prescriptions=prescriptions,
+                                          survey_doctor=session["id_doctor"],
+                                          survey_story=survey_story_id)
+
+        with UseDatabase(current_app.config['db_config']) as cursor:
+            cursor.execute(sql_for_new_survey)
+
+    if request.form.get("is-discharge-form") == "yes":
+        sql_for_discharge_patient = provider.get("discharge_patient.sql",
+                                                 patient_id=request.form.get("id_patient"))
+        with UseDatabase(current_app.config['db_config']) as cursor:
+            print("sql_for_discharge_patient:", sql_for_discharge_patient)
+            cursor.execute(sql_for_discharge_patient)
+
+    return render_doctor()
 
 
 def render_doctor():
