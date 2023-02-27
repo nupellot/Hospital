@@ -5,16 +5,13 @@
 <title>Dashboard</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
 
-<div class="make-survey-title">Провести осмотр</div>
+<div class="main-title">Панель инструментов</div>
 
-{#<form class="SendForm" action="" method ="POST">#}
-{#    <label class="ProductNameLabel"  for="product">#}
-{#        <div class="Name">Введите дату</div>#}
-{#    </label>#}
-{#    <input class="ProductNameInput" name = year id="year" type = text placeholder="2022">#}
-{#    <input class="ProductNameInput" name = month id="month" type = text placeholder="09">#}
-{#    <input class="ProductNameSend" type = submit value ="Отправить">#}
-{#</form>#}
+
+
+{% if session["role"] == "doctor" %}
+
+<div class="make-survey-title mid-title">Провести осмотр</div>
 
 <form class="make-survey-block" action="" method ="POST">
     <select name="id_patient" id="" class="patient-selection">
@@ -87,6 +84,72 @@
         </a>
     {% endfor %}
 </div>
+
+
+
+{% elif session["role"] == "registrator" %}
+
+<div class="new-story-title mid-title">Добавить историю болезни</div>
+
+<form class="add-story-block" action="" method ="POST">
+    <select name="id_patient" id="" class="patient-selection">
+        {% for patient in patients %}
+            <option value="{{ patient["id_patient"] }}">
+                {{ patient["surname"] }}
+                {{ patient["name"] }}
+                {% if patient["patronymic"] %}
+                    {{ patient["patronymic"] }}
+                {% endif %}
+                <span class="birth-date">{{ patient["birth_year"] }} г.р.</span>
+            </option>
+        {% endfor %}
+    </select>
+    <select name="id_doctor" id="" class="doctor-selection">
+        {% for doctor in doctors %}
+            <option value="{{ doctor["id_doctor"] }}">
+                {{ doctor["surname"] }}
+                {{ doctor["name"] }}
+                {% if doctor["patronymic"] %}
+                    {{ doctor["patronymic"] }},
+                {% endif %}
+                {{ doctor["specialization"] }}
+                [
+                {% if doctor["occupancy"] %}
+                    {{ doctor["occupancy"] }}
+                {% else %}
+                    0
+                {% endif %}
+                Пациентов ]
+            </option>
+        {% endfor %}
+    </select>
+    <input type="text" class="diagnose-input" name="diagnose">
+    <select name="id_ward" id="" class="ward-selection">
+        {% for ward in wards %}
+            <option value="{{ ward["id_department"] }}-{{ ward["id_ward"] }}">
+                Палата
+                {{ ward["id_department"] }}-{{ ward["id_ward"] }}
+                [
+                {% if ward["occupancy"] %}
+                    {{ ward["occupancy"] }}
+                {% else %}
+                    0
+                {% endif %}
+                / {{ ward["capacity"] }}
+                ]
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="Отправить" class="add-story-button">
+    <input class="" type="hidden" name="is-new-story-block" value="yes">
+</form>
+
+{% else %}
+
+Панель инструментов для пациента в разработке
+
+{% endif %}
 
 
 

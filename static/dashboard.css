@@ -1,4 +1,10 @@
-.make-survey-title {
+.main-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.mid-title {
     font-size: 1.25rem;
     margin-bottom: 10px;
     font-weight: 600;
@@ -10,14 +16,12 @@
 }
 
 .patient-selection {
-    font-family: "Montserrat", sans-serif;
-    /*border-radius: 5px;*/
-    font-weight: 600;
-    padding: 10px;
-    font-size: 1rem;
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid gray;
+    /*font-family: "Montserrat", sans-serif;*/
+    /*!*border-radius: 5px;*!*/
+    /*padding: 10px;*/
+    /*width: 100%;*/
+    /*border: none;*/
+    /*border-bottom: 1px solid gray;*/
 }
 
 .survey-text-input {
@@ -36,6 +40,8 @@
     background: #3535ff;
     color: white;
     width: 100%;
+    /*border-left-style: hidden;*/
+    /*outline: none !important;*/
     border-radius: inherit;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
@@ -64,14 +70,13 @@
 
 .patient-container {
     border-radius: inherit;
-    outline: 2px solid black;
+    border: 2px solid black;
     width: 100%;
     height: 100px;
     display: grid;
     grid-template-columns: 1fr 100px;
     grid-column-gap: 10px;
     margin-bottom: 20px;
-    font-weight: 500;
     /*margin: 10px;*/
 }
 
@@ -126,6 +131,7 @@
     border: 2px solid #46df11;
     background: rgba(50, 206, 0, 0.89);
     color: white;
+    border-radius: inherit;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
@@ -138,3 +144,43 @@
     font-size: 0.7rem;
     font-weight: 600;
 }
+
+
+.add-story-block {
+    display: grid;
+    /*outline: 1px solid red;*/
+    grid-template-rows: 40px 40px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    /*grid-template-columns: 1fr 1fr;*/
+    border-radius: inherit;
+}
+
+.add-story-block > * {
+    /*outline: 1px solid blue;*/
+}
+
+
+.add-story-button {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+select, .diagnose-input {
+    outline: none;
+    border-radius: inherit;
+    border: 1px solid black;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    padding: 5px;
+}
+
+.add-story-button {
+    background: #3535ff;
+    color: white;
+    border-radius: inherit;
+    padding: 10px;
+}
+
+
