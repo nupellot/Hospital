@@ -42,6 +42,8 @@ def menu_choice():
     if request.method == "GET":
         if session["role"] == "doctor":
             return render_doctor()
+        if session["role"] == "registrator":
+            return render_registrator()
         else:
             return redirect(url_for("bp_person.person", user_login=session["login"]))
 
@@ -105,6 +107,58 @@ def render_doctor():
                            active_patients=active_patients,
                            doctor_active_patients=doctor_active_patients,
                            session=session)
+
+
+def render_registrator():
+    # Получаем информацию обо всех пациентах.
+    sql_for_inactive_patients = provider.get("inactive_patients.sql")
+    # print("sql_for_inactive_patients:", sql_for_inactive_patients)
+    inactive_patients = select_dict(current_app.config['db_config'], sql_for_inactive_patients)
+    # print("inactive_patients:", inactive_patients)
+
+    # Получаем информацию обо всех палатах.
+    sql_for_all_wards = provider.get("all_wards.sql")
+    # print("sql_for_all_wards:", sql_for_all_wards)
+    all_wards = select_dict(current_app.config['db_config'], sql_for_all_wards)
+    # print("all_wards:", all_wards)
+    
+    # Получаем информацию о занятости всех палат.
+    sql_for_all_wards_occupancy = provider.get("all_wards_occupancy.sql")
+    # print("sql_for_all_wards_occupancy:", sql_for_all_wards_occupancy)
+    all_wards_occupancy = select_dict(current_app.config['db_config'], sql_for_all_wards_occupancy)
+    # print("all_wards_occupancy:", all_wards_occupancy)
+
+    # Склеиваем палаты с их занятостью.
+    for ward in all_wards:
+        for occupancy in all_wards_occupancy:
+            if ward["id_ward"] == occupancy["id_ward"]:
+                ward["occupancy"] = occupancy["occupancy"]
+    # print("all_wards:", all_wards)
+    
+    # Получаем информацию обо всех врачах.
+    sql_for_all_doctors = provider.get("all_doctors.sql")
+    # print("sql_for_all_doctors:", sql_for_all_doctors)
+    all_doctors = select_dict(current_app.config['db_config'], sql_for_all_doctors)
+    # print("all_doctors:", all_doctors)
+
+    # Получаем информацию о занятости всех палат.
+    sql_for_all_doctors_occupancy = provider.get("all_doctors_occupancy.sql")
+    # print("sql_for_all_doctors_occupancy:", sql_for_all_doctors_occupancy)
+    all_doctors_occupancy = select_dict(current_app.config['db_config'], sql_for_all_doctors_occupancy)
+    # print("all_doctors_occupancy:", all_doctors_occupancy)
+
+    # Склеиваем палаты с их занятостью.
+    for doctor in all_doctors:
+        for occupancy in all_doctors_occupancy:
+            if doctor["id_doctor"] == occupancy["id_doctor"]:
+                doctor["occupancy"] = occupancy["occupancy"]
+    # print("all_doctors:", all_doctors)
+
+    return render_template('dashboard.html',
+                           patients=inactive_patients,
+                           session=session,
+                           doctors=all_doctors,
+                           wards=all_wards)
 
 
 @app.route('/exit')
