@@ -7,7 +7,7 @@ from flask import session, render_template, current_app, request, redirect, url_
 def login_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if 'user_id' in session:
+        if 'id_patient' in session or "id_doctor" in session:
             return func(*args, **kwargs)
         return redirect(url_for('bp_auth.start_auth'))
     return wrapper
