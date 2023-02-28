@@ -48,10 +48,11 @@ def menu_choice():
             return redirect(url_for("bp_person.person", user_login=session["login"]))
 
     if request.method == "POST":
-        print("request.form", request.form)
+        # print("request.form", request.form)
         if session["role"] == "doctor":
             return process_doctor()
-
+        if session["role"] == "registrator":
+            return process_registrator()
         else:
             return "Unknown role"
     else:
@@ -107,6 +108,32 @@ def render_doctor():
                            active_patients=active_patients,
                            doctor_active_patients=doctor_active_patients,
                            session=session)
+
+
+def process_registrator():
+    if request.form.get("is-new-story-form") == "yes":
+        print("request.form", request.form)
+        # print("request.form.get(\"id_patient\"):", request.form.get("id_patient"))
+        # survey_patient = request.form.get("id_patient")
+        # # print("request.form.get(\"survey_text\"):", request.form.get("survey_text"))
+        # prescriptions = request.form.get("survey_text")
+        # sql_for_get_story_by_patient = provider.get("get_story_by_patient_id.sql",
+        #                                             patient_id=survey_patient)
+        # survey_story = select_dict(current_app.config['db_config'], sql_for_get_story_by_patient)
+        # survey_story_id = survey_story[0]["id_story"]
+        sql_for_new_story = provider.get("new_story.sql",
+                                        diagnosis=request.form.get("diagnosis"),
+                                        story_doctor=request.form.get("id_doctor"),
+                                        story_ward=request.form.get("id_ward"),
+                                        story_patient=request.form.get("id_patient")
+                                        )
+
+        with UseDatabase(current_app.config['db_config']) as cursor:
+            print("sql_for_new_story", sql_for_new_story)
+            cursor.execute(sql_for_new_story)
+
+
+    return render_registrator()
 
 
 def render_registrator():
@@ -179,4 +206,4 @@ def exit_func():
 if __name__ == '__main__':
     # app = add_blueprint_access_handler(app, ['blueprint_report'], group_required)
     # app = add_blueprint_access_handler(app, ['blueprint_market'], external_required)
-    app.run(host='127.0.0.1', port=5001, debug=True)
+    app.run(host='127.0.0.1', port=5002, debug=True)
