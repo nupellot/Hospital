@@ -92,7 +92,7 @@
 <div class="new-story-title mid-title">Добавить историю болезни</div>
 
 <form class="add-story-block" action="" method ="POST">
-    <select name="id_patient" id="" class="patient-selection">
+    <select name="id_patient" id="" class="">
         {% for patient in patients %}
             <option value="{{ patient["id_patient"] }}">
                 {{ patient["surname"] }}
@@ -110,8 +110,8 @@
                 {{ doctor["surname"] }}
                 {{ doctor["name"] }}
                 {% if doctor["patronymic"] %}
-                    {{ doctor["patronymic"] }},
-                {% endif %}
+                    {{ doctor["patronymic"] }}
+                {% endif %},
                 {{ doctor["specialization"] }}
                 [
                 {% if doctor["occupancy"] %}
@@ -123,10 +123,10 @@
             </option>
         {% endfor %}
     </select>
-    <input type="text" class="diagnose-input" name="diagnose">
+    <input type="text" class="diagnose-input" name="diagnosis" placeholder="Предварительный диагноз">
     <select name="id_ward" id="" class="ward-selection">
         {% for ward in wards %}
-            <option value="{{ ward["id_department"] }}-{{ ward["id_ward"] }}">
+            <option value="{{ ward["id_ward"] }}">
                 Палата
                 {{ ward["id_department"] }}-{{ ward["id_ward"] }}
                 [
@@ -142,7 +142,7 @@
     </select>
 
     <input type="submit" value="Отправить" class="add-story-button">
-    <input class="" type="hidden" name="is-new-story-block" value="yes">
+    <input class="" type="hidden" name="is-new-story-form" value="yes">
 </form>
 
 {% else %}

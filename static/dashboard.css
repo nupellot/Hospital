@@ -176,6 +176,14 @@ select, .diagnose-input {
     padding: 5px;
 }
 
+.patient-selection {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
 .add-story-button {
     background: #3535ff;
     color: white;
