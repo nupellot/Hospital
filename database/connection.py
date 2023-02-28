@@ -49,7 +49,7 @@ class UseDatabase:
             exc_val: Значение возможной ошибки при работе менеджера.
             exc_tr: Traceback (подробный текст ошибки) при работе менеджера.
         """
-        print("Exit")
+        # print("Exit")
         if exc_val:
             # print(exc_val)
             # print(exc_type)

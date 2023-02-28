@@ -68,7 +68,7 @@ select {
 }
 
 .header .plus-icon {
-    height: 55%;
+    height: 30px;
     margin-right: 10px;
 }
 
@@ -86,6 +86,15 @@ select {
     align-items: center;
 }
 
+.settings-icon-container {
+    width: 32px;
+    /*display: block;*/
+    /*outline: 1px solid red;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header .settings-icon {
     margin-right: 5px;
     height: 45%;
@@ -94,6 +103,16 @@ select {
 .header .user-name {
     font-weight: 500;
     font-size: 1rem;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-tabler-logout {
+    margin-left: 5px;
 }
 
 .content {

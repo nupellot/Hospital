@@ -10,25 +10,36 @@
 <div class="container">
     <header class="header">
         <div class="header-inner-container">
-            <a class="title" href="{{ url_for('bp_person.person', user_login = session["login"]) }}">
-                <img class="plus-icon" src="{{ url_for("static", filename="plus.png") }}">
-                <div class="title-text">Hospital</div>
-            </a>
-            <a href="{{ url_for("bp_person.settings", user_login = session["login"]) }}" class="user-info">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon settings-icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                   <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                   <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-                <span class="user-name">
+            <span class="title" >
+                <a href="/" class="plus-icon-container">
+                    <img class="plus-icon" src="{{ url_for("static", filename="plus.png") }}">
+                </a>
+                <a class="title-text" href="{{ url_for("bp_ward.wards_list") }}">Hospital</a>
+            </span>
+            <div class="user-info">
+                <a href="{{ url_for("bp_person.settings", user_login = session["login"]) }}" class="settings-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon settings-icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </a>
+                <a class="user-name" href="{{ url_for("bp_person.person", user_login = session["login"]) }}">
                     {{ session["surname"] }}
                     {{ session["name"][0] }}.
                     {% if session["patronymic"][0] %}
                         {{ session["patronymic"][0] }}.
                     {% endif %}
-                </span>
-            </a>
+                </a>
+                <a href="{{ url_for('bp_auth.start_auth') }}" class="logout-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                       <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                       <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
+                    </svg>
+                </a>
             </div>
+        </div>
     </header>
 
     <div class="content">
