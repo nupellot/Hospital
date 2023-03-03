@@ -25,24 +25,21 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 @blueprint_auth.route('/', methods=['GET', 'POST'])
 def start_auth():
     if request.method == 'GET':
+        # session.clear()
         return render_template('input_login.html', message='')
     else:
         login = request.form.get('login')
         password = request.form.get('password')
-        # if request.form.get("is-doctor"):
-        #     is_doctor = True
-        # else:
-        #     is_doctor = False
         print("login", login)
         print("password", password)
         if login:
             # Получаем информацию о разных пользователях с таким логином и паролем.
             user_info = get_user_info(login, password)
-            print("user_info", user_info)
+            # print("user_info", user_info)
             if user_info:
                 # Берём первого (единственного) пользователя с таким логином и паролем.
                 user_dict = user_info[0]
-                print("user_info[0]", user_info[0])
+                # print("user_info[0]", user_info[0])
                 # Записываем в сессию полученную из БД информацию о пользователе.
                 session.clear()
 
@@ -55,12 +52,10 @@ def start_auth():
 
                 if session["image"]:
                     session["image"] = url_for("static", filename="user_photos") + "/" + session["image"]
-                # session['user_id'] = user_dict['user_id']
-                # session['user_group'] = user_dict['user_group']
-                # session['user_name'] = user_dict['user_name']
-                # session['user_login'] = login
+
+                print("session:", session)
                 session.permanent = True
-                return redirect(url_for('bp_person.person', user_login = session["login"]))
+                return redirect(url_for('dashboard'))
                 # return render_template("base.html")
             else:  # Не нашёлся пользователь с такими данными.
                 return render_template('input_login.html', message='Неверные данные для входа')

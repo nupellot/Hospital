@@ -7,7 +7,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: linear-gradient(to right, blue, pink);
+    background: linear-gradient(to right, #ffa4a4, #afffd0);
 }
 
 input, button {
