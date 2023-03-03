@@ -1,12 +1,13 @@
 {
-  "typical": [
-    "blueprint_report"
+  "patient": [
+    "bp_person"
   ],
-  "admin": [
-    "blueprint_market",
-    "bp_orderlist"
+  "doctor": [
+    "bp_person",
+    "bp_ward"
   ],
-  "external": [
-    "blueprint_market"
+  "registrator": [
+    "bp_person",
+    "bp_ward"
   ]
 }

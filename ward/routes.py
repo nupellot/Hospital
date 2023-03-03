@@ -7,6 +7,7 @@ from flask import (
     session, redirect, url_for
 )
 
+from access import group_required
 from database.operations import select_dict, select
 from database.sql_provider import SQLProvider
 
@@ -17,6 +18,7 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 # Обрабатываем страницу с информацией о конкретной палате.
 @blueprint_ward.route('/<int:department_id>-<int:ward_id>', methods=['GET', 'POST'])
+@group_required
 def specific_ward(department_id, ward_id):
     # if session["role"] == "patient":
     #     return "Отказано в доступе"
@@ -44,6 +46,7 @@ def specific_ward(department_id, ward_id):
 
 # Обрабатываем страницу с информацией о всех палатах
 @blueprint_ward.route('/', methods=['GET', 'POST'])
+@group_required
 def wards_list():
     if session["login"] == "patient":
         return "Отказано в доступе"
