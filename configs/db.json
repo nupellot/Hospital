@@ -1,7 +1,7 @@
 {
-  "host": "MYSQLHOST",
-  "port": MYSQLPORT,
-  "user": "MYSQLUSER",
-  "password": "MYSQLPASSWORD",
-  "database": "MYSQLDATABASE"
+  "host": "containers-us-west-164.railway.app",
+  "port": 6886,
+  "user": "root",
+  "password": "OudGxX864TRFN8lP3VN6",
+  "database": "railway"
 }
