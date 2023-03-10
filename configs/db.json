@@ -2,6 +2,6 @@
   "host": "containers-us-west-164.railway.app",
   "port": 6886,
   "user": "root",
-  "password": `MYSQLPASSWORD`,
+  "password": "{{MYSQLPASSWORD}}",
   "database": "railway"
 }
