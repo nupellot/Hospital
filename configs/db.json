@@ -1,6 +1,6 @@
 {
   "host": "MYSQLHOST",
-  "port": "MYSQLPORT",
+  "port": MYSQLPORT,
   "user": "MYSQLUSER",
   "password": "MYSQLPASSWORD",
   "database": "MYSQLDATABASE"
