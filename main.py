@@ -22,7 +22,11 @@ app.config['cache_config'] = json.load(open('configs/cache.json'))
 app.config['db_config'] = json.load(open('configs/db.json'))
 
 for key in app.config['db_config']:
-    app.config['db_config'][key] = os.getenv(str(app.config['db_config'][key]))
+    if os.getenv(str(app.config['db_config'][key])):
+        if key == "port":
+            app.config['db_config'][key] = int(os.getenv(str(app.config['db_config'][key])))
+        else:
+            app.config['db_config'][key] = os.getenv(str(app.config['db_config'][key]))
     print(app.config['db_config'][key])
 # app.config['db_config']['password'] = os.getenv('MYSQLPASSWORD')
 
