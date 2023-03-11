@@ -17,11 +17,14 @@ app.register_blueprint(blueprint_auth, url_prefix='/auth')
 app.register_blueprint(blueprint_person, url_prefix="/person")
 app.register_blueprint(blueprint_ward, url_prefix='/ward')
 
-
-app.config['db_config'] = json.load(open('configs/db.json'));
-app.config['db_config']['password'] = os.getenv('MYSQLPASSWORD');
 app.config['access_config'] = json.load(open('configs/access.json'))
 app.config['cache_config'] = json.load(open('configs/cache.json'))
+app.config['db_config'] = json.load(open('configs/db.json'))
+
+for key in app.config['db_config']:
+    app.config['db_config'][key] = os.getenv(str(app.config['db_config'][key]))
+    print(app.config['db_config'][key])
+# app.config['db_config']['password'] = os.getenv('MYSQLPASSWORD')
 
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
