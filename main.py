@@ -18,7 +18,8 @@ app.register_blueprint(blueprint_person, url_prefix="/person")
 app.register_blueprint(blueprint_ward, url_prefix='/ward')
 
 
-app.config['db_config'] = json.load(open('configs/db.json'))
+app.config['db_config'] = json.load(open('configs/db.json'));
+app.config['db_config']['password'] = os.getenv('MYSQLPASSWORD');
 app.config['access_config'] = json.load(open('configs/access.json'))
 app.config['cache_config'] = json.load(open('configs/cache.json'))
 
