@@ -16,7 +16,11 @@
             <div class="story-title">Пациент никогда не содержался в госпитале</div>
         {% endif %}
     {% elif person["role"] == "doctor" %}
-        <div class="story-title">Истории болезни, в которых врач принимал участие</div>
+        {% if person["stories"]|length > 0 %}
+            <div class="story-title">Истории болезни, в которых врач принимал участие</div>
+        {% else %}
+            <div class="story-title">Нет информации об историях болезни, в которых врач принимал участие</div>
+        {% endif %}
     {% endif %}
 
     {% for story in person["stories"] %}
