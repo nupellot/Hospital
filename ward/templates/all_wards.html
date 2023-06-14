@@ -9,6 +9,7 @@
 
 
 <div class="department-container">
+{#Перебираем все отделения#}
 {% for department in departments %}
 
 <div class="department-block">
@@ -37,14 +38,16 @@
 
 
     <div class="head-title mid-title">Заведующий</div>
-    <div class="department-head doctor-block flowing">{{ department["department_head"]["surname"] }} {{ department["department_head"]["name"][0] }}. {% if department["department_head"]["patronymic"] %} {{ department["department_head"]["patronymic"][0] }}. {% endif %}</div>
+    <a class="department-head doctor-block flowing" href="/person/{{ department["department_head"]["login"] }}">
+        {{ department["department_head"]["surname"] }} {{ department["department_head"]["name"][0] }}. {% if department["department_head"]["patronymic"] %} {{ department["department_head"]["patronymic"][0] }}. {% endif %}
+    </a>
 
     <div class="doctors-title mid-title">Врачи</div>
 
     <div class="doctors-container">
         {% for doctor in department["doctors"] %}
 
-        <a href="" class="doctor-block flowing">
+        <a href="/person/{{ doctor["login"] }}" class="doctor-block flowing">
             <span class="doctor-name-and-specialization">
                 <span class="doctor-name">{{ doctor["surname"] }} {{ doctor["name"][0] }}. {% if doctor["patronymic"] %} {{ doctor["patronymic"][0] }}. {% endif %}</span>
                 <span class="doctor-specialization">- {{ doctor["specialization"] }}</span>
