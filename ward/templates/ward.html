@@ -32,7 +32,7 @@
             <div class="patient-name">{{ patient["surname"] }} {{ patient["name"] }} {% if patient["patronymic"] %} {{ patient["patronymic"] }} {% endif %}</div>
             <div class="patient-sex-and-birth-date">{{ patient["sex"] }}, {{ patient["birth_date"] }}</div>
             <div class="patient-diagnosis">Диагноз: {{ patient["diagnosis"] }}</div>
-            <div class="patient-doctor">Лечащий врач: {{ patient["doctor_surname"] }} {{ patient["doctor_name"][0] }}. {% if patient["doctor_patronymic"] %} {{ patient["doctor_patronymic"] }}. {% endif %}</div>
+            <div class="patient-doctor">Лечащий врач: {{ patient["doctor_surname"] }} {{ patient["doctor_name"][0] }}. {% if patient["doctor_patronymic"] %} {{ patient["doctor_patronymic"][0] }}. {% endif %}</div>
             <div class="patient-reg-date">Дата поступления: {{ patient["reg_date"] }}</div>
         </div>
     </a>
