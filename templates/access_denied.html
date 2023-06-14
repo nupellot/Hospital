@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отказано в доступе</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename="base.css") }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename="access_denied.css") }}">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="access_denied">У вас нет прав на просмотр данной страницы ;(</div>
+    <button  class="back-button flowing" type="button" onclick="history.back();" value="Вернуться назад">Вернуться назад</button>
+</div>
+
+</body>
+</html>

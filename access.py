@@ -32,12 +32,11 @@ def group_required(f):
         config = current_app.config['access_config']
         if group_validation(config):
             return f(*args, **kwargs)
-        return "Вашей роли недоступен данный модуль"
+        return render_template('access_denied.html')
     return wrapper
 
 
 def external_validation(config):
-    # endpoint_app - обработчик, из которого вызван реквест.
     # Метод split разбивает строку на подстроки, находя разделитель в виде своего аргумента.
     endpoint_app = request.endpoint.split('.')[0]
     user_id = session.get('user_id', None)
@@ -56,5 +55,5 @@ def external_required(f):
         config = current_app.config['access_config']
         if external_validation(config):
             return f(*args, **kwargs)
-        return render_template('exceptions/external_only.html')
+        return render_template('templates/access_denied.html')
     return wrapper
