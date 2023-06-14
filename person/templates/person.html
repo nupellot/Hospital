@@ -10,7 +10,11 @@
 <div class="stories-container">
 
     {% if person["role"] == "patient" %}
-        <div class="story-title">Все истории болезни пациента</div>
+        {% if person["stories"]|length != 0 %}
+            <div class="story-title">Все истории болезни пациента</div>
+        {% else %}
+            <div class="story-title">Пациент никогда не содержался в госпитале</div>
+        {% endif %}
     {% elif person["role"] == "doctor" %}
         <div class="story-title">Истории болезни, в которых врач принимал участие</div>
     {% endif %}
